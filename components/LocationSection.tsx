@@ -1,70 +1,71 @@
 'use client';
 
-import { Clock3, MapPin, Navigation, Phone, Smartphone } from 'lucide-react';
+import Image from 'next/image';
+import { Clock3, MapPin, Phone, Smartphone } from 'lucide-react';
 import { Instagram } from './BrandIcons';
 import { venue } from '@/lib/site';
-import SectionHeading from './SectionHeading';
+import Reveal from './Reveal';
 import { useBooking } from './BookingProvider';
 
 export default function LocationSection() {
   const { open } = useBooking();
 
   return (
-    <section id="topothesia" className="relative scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <SectionHeading
-          eyebrow="Τοποθεσία & Επικοινωνία"
-          title={<>Σας περιμένουμε στον Εύοσμο</>}
-          description="Δύο βήματα από την Αντώνη Τρίτση, με εύκολη στάθμευση στον περιβάλλοντα χώρο."
-        />
+    <section id="kratisi" aria-label="Κράτηση & Τοποθεσία" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
+      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-accent/[0.12] blur-[120px]" />
 
-        <div className="mt-11 grid gap-5 lg:grid-cols-[minmax(0,1fr)_1.25fr]">
-          <div className="flex flex-col gap-4">
+      <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 snap:py-[4.5vh]">
+        <div className="flex flex-col justify-center">
+          <Reveal className="flex items-center gap-3">
+            <span className="h-px w-8 rule-accent" />
+            <p className="eyebrow">Κράτηση & Τοποθεσία</p>
+          </Reveal>
+          <Reveal as="h2" delay={60} className="mt-4 max-w-xl text-[2rem] font-normal leading-[1.12] tracking-tight text-chalk sm:text-[2.6rem] snap:mt-[1.8vh] snap:text-[length:clamp(2.1rem,5.4vh,3rem)]">
+            Κλείστε το τραπέζι σας πριν <span className="accent-word">εξαντληθούν</span>.
+          </Reveal>
+          <Reveal as="p" delay={120} className="mt-4 max-w-lg text-[0.98rem] leading-relaxed text-white/60 snap:mt-[1.8vh]">
+            Τα τραπέζια μπροστά στη σκηνή κλείνουν από νωρίς μέσα στην εβδομάδα. Θα μας βρείτε δύο βήματα από την
+            Αντώνη Τρίτση, με εύκολη στάθμευση γύρω από το μαγαζί.
+          </Reveal>
+
+          <Reveal delay={180} className="mt-7 flex flex-col gap-3 sm:flex-row snap:mt-[3.5vh]">
+            <button onClick={() => open()} className="btn-primary w-full sm:w-auto">
+              Κράτηση Τραπεζιού
+            </button>
+            <a href={`tel:${venue.phoneLinks.landline}`} className="btn-ghost w-full sm:w-auto">
+              <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
+            </a>
+          </Reveal>
+
+          <Reveal delay={240} className="mt-8 grid gap-3 sm:grid-cols-2 snap:mt-[4vh]">
+            <InfoRow icon={<MapPin className="h-4 w-4" />} label="Διεύθυνση" value={venue.address} hint={venue.city} />
             <InfoRow
-              icon={<MapPin className="h-4.5 w-4.5" />}
-              label="Διεύθυνση"
-              value={venue.address}
-              hint={venue.city}
+              icon={<Smartphone className="h-4 w-4" />}
+              label="Κινητό"
+              value={venue.phones.mobile}
+              hint="Κλήση ή WhatsApp"
+              href={`tel:${venue.phoneLinks.mobile}`}
             />
             <InfoRow
-              icon={<Phone className="h-4.5 w-4.5" />}
-              label="Τηλέφωνα κρατήσεων"
-              value={venue.phones.landline}
-              hint={venue.phones.mobile}
-              href={`tel:${venue.phoneLinks.landline}`}
+              icon={<Clock3 className="h-4 w-4" />}
+              label="Ώρες"
+              value="Παρ. & Σάβ. από 21:00"
+              hint="Live από τις 21:30"
             />
             <InfoRow
-              icon={<Clock3 className="h-4.5 w-4.5" />}
-              label="Ώρες λειτουργίας"
-              value={venue.operatingHours}
-              hint="Έναρξη ζωντανής μουσικής 21:30"
-            />
-            <InfoRow
-              icon={<Instagram className="h-4.5 w-4.5" />}
+              icon={<Instagram className="h-4 w-4" />}
               label="Social"
               value={`@${venue.social.instagram}`}
               hint={venue.social.facebook}
               href={`https://instagram.com/${venue.social.instagram}`}
               external
             />
-
-            <div className="mt-1 grid gap-3 sm:grid-cols-2">
-              <button onClick={() => open()} className="btn-gold w-full">
-                Κράτηση Τραπεζιού
-              </button>
-              <a
-                href={venue.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost w-full text-center leading-tight"
-              >
-                <Navigation className="h-4 w-4 shrink-0 text-gold" /> Άνοιγμα στο Google Maps
-              </a>
-            </div>
-          </div>
-
-          <MockMap />
+          </Reveal>
         </div>
+
+        <Reveal delay={120} className="flex min-h-0 flex-col">
+          <MockMap />
+        </Reveal>
       </div>
     </section>
   );
@@ -87,19 +88,19 @@ function InfoRow({
 }) {
   const content = (
     <>
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold/[0.10] text-gold ring-1 ring-gold/20">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/30 bg-accent/10 text-accent-soft lg:hidden xl:flex">
         {icon}
       </span>
       <span className="min-w-0">
-        <span className="block text-[0.68rem] font-bold uppercase tracking-[0.22em] text-muted">{label}</span>
-        <span className="mt-1 block truncate text-[1.02rem] font-semibold text-chalk">{value}</span>
-        {hint && <span className="block truncate text-[0.82rem] text-white/45">{hint}</span>}
+        <span className="block text-[0.62rem] font-bold uppercase tracking-[0.2em] text-muted">{label}</span>
+        <span className="mt-0.5 block truncate text-[0.92rem] font-semibold text-chalk">{value}</span>
+        {hint && <span className="block truncate text-[0.76rem] text-white/45">{hint}</span>}
       </span>
     </>
   );
 
   const className =
-    'flex items-center gap-4 rounded-2xl card-surface px-4 py-4 transition-all duration-300 hover:border-gold/25 hover:bg-white/[0.03]';
+    'flex min-w-0 items-center gap-3.5 card-surface px-4 py-3.5 transition-all duration-300 hover:border-accent/35 hover:bg-white/[0.03]';
 
   return href ? (
     <a href={href} className={className} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>
@@ -112,7 +113,7 @@ function InfoRow({
 
 function MockMap() {
   return (
-    <div className="relative min-h-[340px] overflow-hidden rounded-[26px] border border-white/[0.08] bg-[#0f1216] sm:min-h-[460px]">
+    <div className="relative min-h-[340px] flex-1 overflow-hidden border border-white/[0.08] bg-[#0f1216] sm:min-h-[420px] snap:min-h-0">
       {/* stylised street grid */}
       <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>
@@ -137,28 +138,27 @@ function MockMap() {
         className="absolute inset-x-0 top-[46%] mt-4 h-[2px]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(90deg, rgba(245,158,11,0.38) 0 14px, transparent 14px 28px)',
+            'repeating-linear-gradient(90deg, rgba(236,74,115,0.4) 0 14px, transparent 14px 28px)',
         }}
       />
 
-      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_45%_48%,rgba(245,158,11,0.16),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_45%_48%,rgba(196,28,71,0.18),transparent_70%)]" />
 
       <span className="absolute left-[42%] top-[46%] flex -translate-x-1/2 -translate-y-full flex-col items-center">
-        <span className="rounded-xl border border-gold/40 bg-black/85 px-3 py-2 text-center backdrop-blur-md">
-          <span className="block font-display text-[0.95rem] leading-tight text-chalk">Crayon</span>
-          <span className="block text-[0.6rem] font-bold uppercase tracking-[0.2em] text-gold">food & melody</span>
+        <span className="border border-accent/50 bg-black/85 px-3 py-2 backdrop-blur-md">
+          <Image src="/images/brand/logo-lockup.png" alt="Crayon food & melody" width={96} height={61} className="h-[46px] w-auto" />
         </span>
         <span className="relative mt-1 flex h-4 w-4">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/60" />
-          <span className="relative inline-flex h-4 w-4 rounded-full bg-gold ring-4 ring-gold/25" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
+          <span className="relative inline-flex h-4 w-4 rounded-full bg-accent ring-4 ring-accent/25" />
         </span>
       </span>
 
-      <span className="absolute left-4 top-4 rounded-lg border border-white/10 bg-black/60 px-2.5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/50 backdrop-blur-md">
+      <span className="absolute left-4 top-4 border border-white/10 bg-black/60 px-2.5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/50 backdrop-blur-md">
         Αντώνη Τρίτση
       </span>
 
-      <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 backdrop-blur-xl">
+      <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 border border-white/10 bg-black/70 px-4 py-3 backdrop-blur-xl">
         <div className="min-w-0">
           <p className="truncate text-[0.9rem] font-semibold text-chalk">{venue.address}</p>
           <p className="flex items-center gap-1.5 text-[0.76rem] text-muted">
@@ -169,9 +169,9 @@ function MockMap() {
           href={venue.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="shrink-0 rounded-full bg-gold px-4 py-2 text-[0.8rem] font-bold text-black transition hover:brightness-110"
+          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#d62553]"
         >
-          Οδηγίες
+          Οδηγίες στο Maps
         </a>
       </div>
     </div>

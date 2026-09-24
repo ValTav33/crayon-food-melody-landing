@@ -22,24 +22,24 @@ export default function MobileActionBar() {
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       }`}
     >
-      <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-ink/90 p-2 shadow-card backdrop-blur-xl">
+      <div className="flex items-center gap-2 border border-white/10 bg-ink/90 p-2 shadow-card backdrop-blur-xl">
         <a
           href={`tel:${venue.phoneLinks.landline}`}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] py-3 text-[0.88rem] font-semibold text-chalk transition active:scale-[0.97]"
+          className="flex flex-1 items-center justify-center gap-2 border border-white/15 bg-white/[0.05] py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-chalk transition active:scale-[0.97]"
         >
-          <Phone className="h-4 w-4 text-gold" /> Κλήση
+          <Phone className="h-4 w-4 text-accent-soft" /> Κλήση
         </a>
         <a
           href={whatsappHref('Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody.')}
           target="_blank"
           rel="noreferrer"
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-emerald-400/25 bg-emerald-400/[0.10] py-3 text-[0.88rem] font-semibold text-emerald-300 transition active:scale-[0.97]"
+          className="flex flex-1 items-center justify-center gap-2 border border-emerald-400/30 bg-emerald-400/[0.10] py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-emerald-300 transition active:scale-[0.97]"
         >
           <MessageCircle className="h-4 w-4" /> WhatsApp
         </a>
         <button
           onClick={() => open()}
-          className="flex flex-[1.2] items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-amber-300 via-gold to-amber-600 py-3 text-[0.88rem] font-bold text-black shadow-glow-sm transition active:scale-[0.97]"
+          className="flex flex-[1.2] items-center justify-center gap-2 bg-accent py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-white shadow-glow-sm transition active:scale-[0.97]"
         >
           <CalendarCheck className="h-4 w-4" /> Κράτηση
         </button>

@@ -1,19 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* emit responsive/state variants here, so the plain rules below (e.g. .screen's
+   header offset) win over utilities like snap:py-0 */
+@tailwind variants;
 
 :root {
   --ink: #0a0a0a;
-  --ink-card: #141414;
-  --gold: #f59e0b;
-  --gold-soft: #eab308;
-  --coral: #f43f5e;
+  --ink-card: #131313;
+  --accent: #c41c47;
+  --accent-soft: #ec4a73;
+  --header-h: 68px;
+  /* width the labelled section rail occupies on the left (xl+) */
+  --rail-w: 176px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 76px;
+  }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    scroll-padding-top: calc(var(--header-h) + 8px);
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -23,8 +34,12 @@
     overflow-x: hidden;
   }
   ::selection {
-    background: rgba(245, 158, 11, 0.28);
+    background: rgba(196, 28, 71, 0.45);
     color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 2px;
   }
   /* Greek renders on the same stack as Latin, no fallback swap mid-word */
   h1, h2, h3, h4, blockquote {
@@ -33,44 +48,87 @@
   }
 }
 
+/* One section per screen on desktop. Each .screen is exactly one viewport tall and
+   reserves the fixed header's height at its top, so snapping never hides content. */
+@media (min-width: 1024px) and (min-height: 640px) {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 0;
+  }
+  .screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100svh;
+    padding-top: var(--header-h);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .site-footer {
+    scroll-snap-align: end;
+  }
+}
+
 @layer components {
+  .page-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .page-container {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .page-container {
+      padding-inline: 2.5rem;
+      /* clear the marker-only rail */
+      padding-left: 4rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .page-container {
+      /* shift right only as much as the labelled rail needs */
+      padding-left: max(2.5rem, calc(var(--rail-w) - (100vw - 80rem) / 2));
+    }
+  }
+
   .glass {
     @apply border border-white/[0.08] bg-white/[0.04] backdrop-blur-md;
   }
-  .glass-strong {
-    @apply border border-white/[0.10] bg-white/[0.06] backdrop-blur-xl;
-  }
   .card-surface {
-    background: linear-gradient(160deg, #191919 0%, #121212 55%, #0d0d0d 100%);
+    background: linear-gradient(160deg, #181818 0%, #121212 55%, #0d0d0d 100%);
     @apply border border-white/[0.07];
   }
-  .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-semibold text-black transition-all duration-300 active:scale-[0.97];
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 45%, #d97706 100%);
-    box-shadow: 0 10px 30px -12px rgba(245, 158, 11, 0.75);
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 bg-accent px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 active:scale-[0.98];
+    box-shadow: 0 12px 30px -14px rgba(196, 28, 71, 0.8);
   }
-  .btn-gold:hover {
-    box-shadow: 0 16px 44px -12px rgba(245, 158, 11, 0.95);
-    filter: brightness(1.07);
+  .btn-primary:hover {
+    background-color: #d62553;
+    box-shadow: 0 16px 40px -12px rgba(196, 28, 71, 0.95);
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3.5 text-[0.95rem] font-semibold text-chalk backdrop-blur-md transition-all duration-300 hover:border-gold/50 hover:bg-white/[0.08] active:scale-[0.97];
+    @apply inline-flex items-center justify-center gap-2 border border-white/25 bg-white/[0.03] px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-chalk backdrop-blur-md transition-all duration-300 hover:border-white/80 hover:bg-white/[0.08] active:scale-[0.98];
+  }
+  .icon-btn {
+    @apply inline-flex items-center justify-center border border-white/15 bg-white/[0.04] p-3 text-white/75 transition hover:border-white/60 hover:text-white;
   }
   .eyebrow {
-    @apply text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-gold/90;
+    @apply text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-accent-soft;
   }
-  .rule-gold {
-    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.55), transparent);
+  .rule-accent {
+    background: linear-gradient(90deg, transparent, rgba(236, 74, 115, 0.7), transparent);
+  }
+  /* the one highlighted word in a headline, echoing the script "Crayon" */
+  .accent-word {
+    @apply font-display italic text-accent-soft;
   }
 }
 
 @layer utilities {
-  .text-gradient-gold {
-    background: linear-gradient(120deg, #fde68a 0%, #f59e0b 42%, #fb7185 98%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -78,13 +136,28 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .mask-fade-r {
-    mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
-  }
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+}
+
+/* Scroll-triggered reveal. Content only starts hidden once JS has run (html.js), so it
+   stays visible if scripts fail. `translate` keeps hover transforms working afterwards. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.js .reveal:not(.is-visible) {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* atmospheric grain */

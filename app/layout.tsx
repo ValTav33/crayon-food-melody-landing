@@ -5,6 +5,7 @@ import './globals.css';
 const display = EB_Garamond({
   subsets: ['latin', 'greek'],
   weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
 });
@@ -38,7 +39,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="el" className={`${display.variable} ${sans.variable}`}>
+    // `js` is added before first paint so scroll-reveal content only hides when JS runs
+    <html lang="el" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

@@ -3,12 +3,14 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Menu, Phone, X } from 'lucide-react';
-import { NAV_LINKS, venue } from '@/lib/site';
+import { NAV_LINKS, SECTIONS, venue } from '@/lib/site';
+import { useActiveSection } from '@/lib/useActiveSection';
 import { useBooking } from './BookingProvider';
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const active = useActiveSection();
   const { open } = useBooking();
 
   useEffect(() => {
@@ -28,34 +30,40 @@ export default function SiteHeader() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'border-b border-white/[0.07] bg-ink/80 backdrop-blur-xl'
+        scrolled || menuOpen
+          ? 'border-b border-white/[0.07] bg-ink/85 backdrop-blur-xl'
           : 'border-b border-transparent bg-gradient-to-b from-black/70 to-transparent'
       }`}
     >
-      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-4 px-4 sm:h-[76px] sm:px-6 lg:px-10">
-        <a href="#top" className="group flex items-center gap-3">
-          <span className="relative block h-10 w-10 shrink-0 overflow-hidden rounded-full bg-black ring-1 ring-white/15 transition group-hover:ring-gold/60 sm:h-11 sm:w-11">
-            <Image src="/images/brand/logo.png" alt="Crayon Food & Melody" fill sizes="44px" className="object-cover" priority />
-          </span>
-          <span className="leading-tight">
-            <span className="block font-display text-[1.05rem] tracking-wide text-chalk sm:text-[1.2rem]">
-              Crayon
-            </span>
-            <span className="block text-[0.6rem] font-semibold uppercase tracking-[0.34em] text-gold/80">
-              food & melody
-            </span>
-          </span>
+      <div className="flex h-[var(--header-h)] items-center justify-between gap-4 px-4 sm:px-6 lg:px-5 xl:px-8">
+        <a href="#top" aria-label="Crayon Food & Melody — αρχή" className="block shrink-0 transition hover:opacity-85">
+          <Image
+            src="/images/brand/logo-lockup.png"
+            alt="Crayon Food & Melody"
+            width={448}
+            height={284}
+            priority
+            className="h-[46px] w-auto sm:h-[54px]"
+          />
         </a>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        {/* only where the rail has no labels; from xl the rail itself is the navigation */}
+        <nav aria-label="Κύρια πλοήγηση" className="hidden items-center gap-1 lg:flex xl:hidden">
           {NAV_LINKS.map((link) => (
             <a
-              key={link.href}
-              href={link.href}
-              className="relative rounded-full px-4 py-2 text-[0.92rem] font-medium text-white/70 transition hover:text-chalk"
+              key={link.id}
+              href={`#${link.id}`}
+              aria-current={active === link.id ? 'true' : undefined}
+              className={`relative px-3.5 py-2 text-[0.78rem] font-semibold uppercase tracking-[0.14em] transition ${
+                active === link.id ? 'text-chalk' : 'text-white/55 hover:text-chalk'
+              }`}
             >
               {link.label}
+              <span
+                className={`absolute inset-x-3.5 -bottom-0.5 h-[2px] bg-accent transition-transform duration-300 ${
+                  active === link.id ? 'scale-x-100' : 'scale-x-0'
+                }`}
+              />
             </a>
           ))}
         </nav>
@@ -63,22 +71,19 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href={`tel:${venue.phoneLinks.landline}`}
-            className="hidden items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-2.5 text-[0.88rem] font-semibold text-gold transition hover:border-gold/60 hover:bg-gold/15 sm:inline-flex"
+            className="hidden items-center gap-2 border border-white/20 px-4 py-2.5 text-[0.8rem] font-semibold tracking-wide text-chalk transition hover:border-white/70 sm:inline-flex"
           >
-            <Phone className="h-3.5 w-3.5" />
+            <Phone className="h-3.5 w-3.5 text-accent-soft" />
             {venue.phones.landline}
           </a>
-          <button
-            onClick={() => open()}
-            className="hidden rounded-full bg-gradient-to-br from-amber-300 via-gold to-amber-600 px-5 py-2.5 text-[0.88rem] font-bold text-black shadow-glow-sm transition hover:brightness-110 lg:inline-flex"
-          >
+          <button onClick={() => open()} className="btn-primary hidden px-5 py-2.5 lg:inline-flex">
             Κράτηση
           </button>
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού'}
             aria-expanded={menuOpen}
-            className="rounded-full border border-white/10 bg-white/[0.05] p-2.5 text-chalk transition hover:bg-white/10 lg:hidden"
+            className="icon-btn p-2.5 text-chalk lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -87,31 +92,38 @@ export default function SiteHeader() {
 
       {menuOpen && (
         <div className="border-t border-white/[0.07] bg-ink/95 backdrop-blur-xl lg:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="border-b border-white/[0.05] py-3.5 text-[1.05rem] font-medium text-white/80 transition hover:text-gold"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav aria-label="Ενότητες σελίδας" className="flex flex-col px-4 py-3 sm:px-6">
+            {SECTIONS.filter((s) => s.id !== 'top').map((section) => {
+              const isActive = active === section.id;
+              return (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`flex items-center gap-3 border-b border-white/[0.05] py-3.5 text-[1.05rem] font-medium transition ${
+                    isActive ? 'text-chalk' : 'text-white/65 hover:text-chalk'
+                  }`}
+                >
+                  <span className={`h-1.5 w-1.5 ${isActive ? 'bg-accent' : 'bg-white/20'}`} />
+                  {section.label}
+                </a>
+              );
+            })}
             <button
               onClick={() => {
                 setMenuOpen(false);
                 open();
               }}
-              className="btn-gold mt-4 w-full"
+              className="btn-primary mt-4 w-full"
             >
               Κράτηση τραπεζιού
             </button>
             <a
               href={`tel:${venue.phoneLinks.landline}`}
-              className="mb-2 mt-3 flex items-center justify-center gap-2 py-2 text-[0.95rem] font-semibold text-gold"
+              className="mb-2 mt-3 flex items-center justify-center gap-2 py-2 text-[0.95rem] font-semibold text-chalk"
             >
-              <Phone className="h-4 w-4" /> {venue.phones.landline}
+              <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
             </a>
           </nav>
         </div>

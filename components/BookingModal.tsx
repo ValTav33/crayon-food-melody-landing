@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import {
   CalendarDays,
@@ -11,7 +12,8 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { venue } from '@/lib/site';
+import { venue, whatsappHref } from '@/lib/site';
+import { useModal } from '@/lib/useModal';
 
 type Props = { isOpen: boolean; occasion?: string; onClose: () => void };
 
@@ -27,19 +29,13 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
 
+  useModal(isOpen, onClose);
+
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    const { overflow } = document.body.style;
-    document.body.style.overflow = 'hidden';
-    const t = window.setTimeout(() => firstFieldRef.current?.focus(), 120);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = overflow;
-      window.clearTimeout(t);
-    };
-  }, [isOpen, onClose]);
+    const t = window.setTimeout(() => firstFieldRef.current?.focus({ preventScroll: true }), 120);
+    return () => window.clearTimeout(t);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -50,9 +46,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
 
   if (!isOpen) return null;
 
-  const waText = encodeURIComponent(
-    `Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody${occasion ? ` για «${occasion}»` : ''}.`,
-  );
+  const waMessage = `Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody${occasion ? ` για «${occasion}»` : ''}.`;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,11 +68,28 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
 
       <div
         ref={dialogRef}
-        className="relative z-10 max-h-[92vh] w-full overflow-y-auto rounded-t-[28px] border border-white/10 bg-ink-card/95 shadow-card backdrop-blur-xl animate-scale-in sm:max-h-[90vh] sm:w-[min(560px,92vw)] sm:rounded-[28px]"
+        className="relative z-10 max-h-[92vh] w-full overflow-y-auto border border-white/10 bg-ink-card shadow-card animate-scale-in sm:max-h-[90vh] sm:w-[min(560px,92vw)]"
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(60%_100%_at_50%_0%,rgba(245,158,11,0.18),transparent_70%)]" />
+        {/* the Facebook banner at its native proportions: both line-art faces stay in frame */}
+        <div className="relative aspect-[1692/597] w-full overflow-hidden">
+          <Image
+            src="/images/brand/banner.jpg"
+            alt="Crayon — food & melody"
+            fill
+            sizes="(max-width: 640px) 100vw, 560px"
+            className="object-cover"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-card to-transparent" />
+          <button
+            onClick={onClose}
+            aria-label="Κλείσιμο"
+            className="absolute right-3 top-3 border border-white/25 bg-black/55 p-2 text-white/85 backdrop-blur-md transition hover:bg-black/75"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
 
-        <div className="relative flex items-start justify-between gap-4 border-b border-white/[0.07] px-6 pb-5 pt-6 sm:px-8">
+        <div className="border-b border-white/[0.07] px-6 pb-5 pt-3 sm:px-8">
           <div>
             <p className="eyebrow">Κράτηση τραπεζιού</p>
             <h3 className="mt-2 text-2xl font-medium text-chalk sm:text-[1.75rem]">
@@ -88,18 +99,11 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
               {venue.operatingHours} · Έναρξη προγράμματος 21:30
             </p>
           </div>
-          <button
-            onClick={onClose}
-            aria-label="Κλείσιμο"
-            className="rounded-full border border-white/10 bg-white/[0.05] p-2 text-muted transition hover:text-chalk"
-          >
-            <X className="h-4 w-4" />
-          </button>
         </div>
 
         {sent ? (
           <div className="px-6 py-12 text-center sm:px-8">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold/15 text-gold ring-1 ring-gold/30">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center border border-accent/40 bg-accent/15 text-accent-soft">
               <Check className="h-8 w-8" />
             </div>
             <h4 className="mt-6 text-2xl font-medium text-chalk">Το αίτημά σας καταχωρήθηκε</h4>
@@ -108,7 +112,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
               <span className="text-chalk">{venue.phones.landline}</span>.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <a href={`tel:${venue.phoneLinks.landline}`} className="btn-gold">
+              <a href={`tel:${venue.phoneLinks.landline}`} className="btn-primary">
                 <Phone className="h-4 w-4" /> Κλήση τώρα
               </a>
               <button onClick={onClose} className="btn-ghost">
@@ -149,7 +153,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
                   className="w-full bg-transparent text-[0.95rem] text-chalk outline-none [color-scheme:dark]"
                 />
               </Field>
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+              <div className="border border-white/[0.1] bg-white/[0.03] px-4 py-3">
                 <span className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
                   <Users className="h-4 w-4" /> Άτομα
                 </span>
@@ -159,9 +163,9 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
                       key={size}
                       type="button"
                       onClick={() => setParty(size)}
-                      className={`h-8 min-w-8 rounded-lg px-2 text-sm font-semibold transition ${
+                      className={`h-8 min-w-8 px-2 text-sm font-semibold transition ${
                         party === size
-                          ? 'bg-gold text-black'
+                          ? 'bg-accent text-white'
                           : 'bg-white/[0.06] text-muted hover:bg-white/[0.12] hover:text-chalk'
                       }`}
                     >
@@ -184,7 +188,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
               </Field>
             </div>
 
-            <button type="submit" className="btn-gold mt-5 w-full">
+            <button type="submit" className="btn-primary mt-5 w-full">
               Αποστολή αιτήματος κράτησης
             </button>
 
@@ -194,10 +198,10 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
 
             <div className="grid gap-3 sm:grid-cols-2">
               <a href={`tel:${venue.phoneLinks.landline}`} className="btn-ghost w-full">
-                <Phone className="h-4 w-4 text-gold" /> {venue.phones.landline}
+                <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
               </a>
               <a
-                href={`https://wa.me/${venue.phoneLinks.mobile.replace('+', '')}?text=${waText}`}
+                href={whatsappHref(waMessage)}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ghost w-full"
@@ -225,7 +229,7 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 transition focus-within:border-gold/45 focus-within:bg-white/[0.05]">
+    <label className="block border border-white/[0.1] bg-white/[0.03] px-4 py-3 transition focus-within:border-accent/60 focus-within:bg-white/[0.05]">
       <span className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
         {icon} {label}
       </span>

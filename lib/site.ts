@@ -8,12 +8,26 @@ export const stories = data.stories as Story[];
 export const gallery = data.gallery as GalleryItem[];
 export const reviews = data.reviews as Review[];
 
+/** Every full-screen section, in page order. Drives the left rail and active-section tracking. */
+export const SECTIONS = [
+  { id: 'top', label: 'Αρχή' },
+  { id: 'programma', label: 'Πρόγραμμα' },
+  { id: 'menu', label: 'Μενού' },
+  { id: 'stories', label: 'Stories' },
+  { id: 'atmosfaira', label: 'Ατμόσφαιρα' },
+  { id: 'kritikes', label: 'Κριτικές' },
+  { id: 'kratisi', label: 'Κράτηση' },
+] as const;
+
+export type SectionId = (typeof SECTIONS)[number]['id'];
+
+/** Header links on screens where the rail has no labels (1024–1279px). */
 export const NAV_LINKS = [
-  { href: '#programma', label: 'Πρόγραμμα' },
-  { href: '#menu', label: 'Μενού' },
-  { href: '#atmosfaira', label: 'Ατμόσφαιρα' },
-  { href: '#topothesia', label: 'Τοποθεσία' },
-];
+  { id: 'programma', label: 'Πρόγραμμα' },
+  { id: 'menu', label: 'Μενού' },
+  { id: 'atmosfaira', label: 'Ατμόσφαιρα' },
+  { id: 'kratisi', label: 'Τοποθεσία' },
+] as const;
 
 export const whatsappHref = (message: string) =>
   `https://wa.me/${venue.phoneLinks.mobile.replace('+', '')}?text=${encodeURIComponent(message)}`;
