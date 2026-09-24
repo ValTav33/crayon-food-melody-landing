@@ -1,0 +1,311 @@
+{
+  "venue": {
+    "name": "Crayon Food & Melody",
+    "tagline": "Εκεί που η γεύση συναντά τη μελωδία",
+    "address": "Αντώνη Τρίτση 94, Εύοσμος 562 24",
+    "city": "Θεσσαλονίκη",
+    "phones": {
+      "landline": "231 070 5900",
+      "mobile": "6931 935 703"
+    },
+    "phoneLinks": {
+      "landline": "+302310705900",
+      "mobile": "+306931935703"
+    },
+    "social": {
+      "instagram": "crayonfoodmelody",
+      "facebook": "Crayon Food & Melody"
+    },
+    "operatingHours": "Παρασκευή & Σάββατο από τις 21:00",
+    "rating": {
+      "score": "3,9",
+      "count": 157,
+      "source": "Google"
+    },
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Crayon+Food+%26+Melody+Antoni+Tritsi+94+Evosmos"
+  },
+  "upcomingEvents": [
+    {
+      "id": "event-1",
+      "title": "Season Opening Live",
+      "subtitle": "Έναρξη χειμερινής σεζόν με ανανεωμένο μουσικό σχήμα",
+      "artists": [
+        "Ευαγγελία Μπεχλιβάνη",
+        "Αλέξανδρος Σαγκούρης",
+        "Κατερίνα Σταμπολάκη"
+      ],
+      "dateDisplay": "Παρασκευή & Σάββατο",
+      "dateShort": "25/09",
+      "time": "21:30",
+      "genre": "Λαϊκό & Έντεχνο Πρόγραμμα",
+      "badge": "Opening Night",
+      "image": "/images/events/opening-team.jpg",
+      "seats": "Τελευταία τραπέζια"
+    },
+    {
+      "id": "event-2",
+      "title": "Guest Special Live",
+      "subtitle": "Μία βραδιά γεμάτη ενέργεια με guest φωνές",
+      "artists": [
+        "Αλέξανδρος Σαγκούρης",
+        "Αναστασία Ευθυμιάδου"
+      ],
+      "dateDisplay": "Σάββατο Night Live",
+      "dateShort": "09/05",
+      "time": "21:30",
+      "genre": "Σύγχρονο Λαϊκό Πρόγραμμα",
+      "badge": "Guest Star",
+      "image": "/images/events/sagkouris-efthymiadou.jpg",
+      "seats": "Διαθέσιμα τραπέζια"
+    },
+    {
+      "id": "event-3",
+      "title": "Live Duet Night",
+      "subtitle": "Οι μεγαλύτερες επιτυχίες σε μια εκρηκτική βραδιά",
+      "artists": [
+        "Ηλίας Ρωμανός",
+        "Κώστας Μικέλης"
+      ],
+      "dateDisplay": "Πέμπτη Special Live",
+      "dateShort": "30/04",
+      "time": "22:00",
+      "genre": "Λαϊκό Πρόγραμμα",
+      "badge": "Special Night",
+      "image": "/images/events/romanos-mikelis.jpg",
+      "seats": "Διαθέσιμα τραπέζια"
+    }
+  ],
+  "menuCategories": [
+    {
+      "id": "appetizers-mains",
+      "title": "Κρεατικά & Μεζέδες",
+      "items": [
+        {
+          "name": "Ποικιλία Κρεατικών Crayon",
+          "description": "Μπιφτεκάκια, πανσετάκια, χωριάτικο λουκάνικο και φιλετάκια κοτόπουλο με πατάτες baby",
+          "price": "24,00€",
+          "tag": "Chef's Special",
+          "image": "/images/food/food-12.jpg"
+        },
+        {
+          "name": "Σουτζουκάκια σε Χειροποίητες Πένες",
+          "description": "Σιγομαγειρεμένα σε σάλτσα φρέσκιας ντομάτας με βασιλικό και τριμμένη μυζήθρα",
+          "price": "13,50€",
+          "tag": "Best Seller",
+          "image": "/images/food/food-9.jpg"
+        },
+        {
+          "name": "Μοσχαρίσιο Μάγουλο σε Ριζότο",
+          "description": "Σιγομαγειρεμένο 8 ώρες, κρεμώδες ριζότο παρμεζάνας και λάδι πάπρικας",
+          "price": "16,50€",
+          "tag": "Signature",
+          "image": "/images/food/food-8.jpg"
+        },
+        {
+          "name": "Παπαρδέλες με Μανιτάρια",
+          "description": "Φρέσκια ζύμη, άγρια μανιτάρια, κρέμα τρούφας και φρεσκοτριμμένο πιπέρι",
+          "price": "12,50€",
+          "tag": null,
+          "image": "/images/food/food-7.jpg"
+        },
+        {
+          "name": "Φέτα σε Φύλλο Κρούστας",
+          "description": "Με μέλι, σουσάμι και μαρμελάδα σύκο",
+          "price": "7,50€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Σαλάτα Crayon",
+          "description": "Δροσερά ανάμεικτα φύλλα, αποξηραμένα φρούτα, ξηροί καρποί, flakes παρμεζάνας και vinaigrette ροδιού",
+          "price": "8,50€",
+          "tag": null,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "title": "Signature Cocktails",
+      "items": [
+        {
+          "name": "Red Velvet Melody",
+          "description": "Premium gin, πουρές άγριων μούρων, lime και άρωμα κανέλας",
+          "price": "10,00€",
+          "tag": "Signature",
+          "image": null
+        },
+        {
+          "name": "Smoky Whiskey Sour",
+          "description": "Bourbon whiskey, φρέσκο λεμόνι, σιρόπι μελιού και aromatic bitters",
+          "price": "11,00€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Passion Spritz",
+          "description": "Aperol, passion fruit cordial, prosecco και σόδα",
+          "price": "9,00€",
+          "tag": "Popular",
+          "image": null
+        },
+        {
+          "name": "Crayon Espresso Martini",
+          "description": "Vodka, freshly brewed espresso, liqueur καφέ και αλάτι Μαλδόν",
+          "price": "10,00€",
+          "tag": null,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "drinks-wine",
+      "title": "Φιάλες & Κρασιά",
+      "items": [
+        {
+          "name": "Απλή Φιάλη Ποτού",
+          "description": "Συνοδεύεται από 4 αναψυκτικά / χυμούς και ξηρούς καρπούς",
+          "price": "85,00€",
+          "tag": "Live Special",
+          "image": null
+        },
+        {
+          "name": "Special Φιάλη Ποτού",
+          "description": "Premium spirits με πλήρη συνοδευτικά για την παρέα",
+          "price": "105,00€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Κτήμα Βιβλία Χώρα (Λευκό)",
+          "description": "Sauvignon Blanc & Ασύρτικο, 750ml",
+          "price": "34,00€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Κυρ-Γιάννη «Δύο Ελιές» (Ερυθρό)",
+          "description": "Ξινόμαυρο & Syrah από τη Νάουσα, 750ml",
+          "price": "32,00€",
+          "tag": "Wine List",
+          "image": "/images/food/food-6.jpg"
+        }
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "s1",
+      "image": "/images/stories/story-8.jpg",
+      "caption": "Μοσχαρίσιο μάγουλο σε κρεμώδες ριζότο",
+      "time": "2 ώ."
+    },
+    {
+      "id": "s2",
+      "image": "/images/stories/story-9.jpg",
+      "caption": "Σουτζουκάκια με χειροποίητες πένες",
+      "time": "4 ώ."
+    },
+    {
+      "id": "s3",
+      "image": "/images/stories/story-13.jpg",
+      "caption": "Your new obsession…",
+      "time": "6 ώ."
+    },
+    {
+      "id": "s4",
+      "image": "/images/stories/story-7.jpg",
+      "caption": "Παπαρδέλες με άγρια μανιτάρια",
+      "time": "8 ώ."
+    },
+    {
+      "id": "s5",
+      "image": "/images/stories/story-10.jpg",
+      "caption": "Ριζότο μανιταριών με σχοινόπρασο",
+      "time": "12 ώ."
+    },
+    {
+      "id": "s6",
+      "image": "/images/stories/story-11.jpg",
+      "caption": "Ψητά σουτζουκάκια σε σάλτσα ντομάτας",
+      "time": "14 ώ."
+    },
+    {
+      "id": "s7",
+      "image": "/images/stories/story-12.jpg",
+      "caption": "Πανσέτα με πουρέ γλυκοπατάτας",
+      "time": "18 ώ."
+    },
+    {
+      "id": "s8",
+      "image": "/images/stories/story-6.jpg",
+      "caption": "Κρασί & ριζότο υπό το φως των κεριών",
+      "time": "20 ώ."
+    },
+    {
+      "id": "s9",
+      "image": "/images/stories/story-14.jpg",
+      "caption": "Caesar, ταρτάρ και ροζέ στο bar",
+      "time": "22 ώ."
+    }
+  ],
+  "gallery": [
+    {
+      "image": "/images/atmosphere/stage-lights.jpg",
+      "label": "Live σκηνή",
+      "span": "tall"
+    },
+    {
+      "image": "/images/atmosphere/crowd-dance.jpg",
+      "label": "Μέχρι το πρωί",
+      "span": "wide"
+    },
+    {
+      "image": "/images/food/food-9.jpg",
+      "label": "Από την κουζίνα",
+      "span": "normal"
+    },
+    {
+      "image": "/images/atmosphere/neon-sign.jpg",
+      "label": "Το σήμα μας",
+      "span": "normal"
+    },
+    {
+      "image": "/images/atmosphere/bar-drinks.jpg",
+      "label": "Καθαρά ποτά",
+      "span": "normal"
+    },
+    {
+      "image": "/images/food/food-12.jpg",
+      "label": "Πιάτα με άποψη",
+      "span": "tall"
+    },
+    {
+      "image": "/images/atmosphere/venue-exterior.jpg",
+      "label": "Αντώνη Τρίτση 94",
+      "span": "normal"
+    },
+    {
+      "image": "/images/atmosphere/guests-table.jpg",
+      "label": "Η παρέα μας",
+      "span": "wide"
+    }
+  ],
+  "reviews": [
+    {
+      "author": "john john",
+      "rating": 5,
+      "text": "Πολύ ωραίος χώρος, η εξυπηρέτηση το ίδιο, οι μουσικοί υπέροχοι με καλό ρεπερτόριο τραγουδιών σε κρατούν σε κέφι και χορό συνέχεια, αλλά και τα ποτά καθαρά."
+    },
+    {
+      "author": "vaia pitaskou",
+      "rating": 5,
+      "text": "Πάρα πολύ ωραίο φαγητό! Πολύ καλή εξυπηρέτηση και το φαγητό ήρθε αρκετά γρήγορα."
+    },
+    {
+      "author": "Damianos Dontsidis",
+      "rating": 5,
+      "text": "Πάρα πολύ εξυπηρετικό το παιδί στο service, ευγενικός χαμογελαστός και πολύ εξυπηρετικός, όπως επίσης και η κοπέλα!"
+    }
+  ]
+}
