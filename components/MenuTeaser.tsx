@@ -19,8 +19,6 @@ export default function MenuTeaser() {
 
   return (
     <section id="menu" aria-label="Μενού" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
-      <div className="pointer-events-none absolute -left-40 top-1/3 h-[26rem] w-[26rem] rounded-full bg-accent/[0.08] blur-[140px]" />
-
       <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14 snap:items-center snap:py-[4.5vh]">
         <div className="flex flex-col">
           <SectionHeading

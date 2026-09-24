@@ -28,7 +28,7 @@ export default function Hero() {
       aria-label="Αρχή"
       className="screen grain relative isolate overflow-hidden pt-[var(--header-h)]"
     >
-      {/* ambient backdrop: a photo on phones, crimson glow everywhere */}
+      {/* phones get a photo behind the headline; desktop shows the site-wide bubbles */}
       <div className="absolute inset-0 -z-10">
         <Image
           src={SLIDES[0].image}
@@ -39,8 +39,6 @@ export default function Hero() {
           className="object-cover opacity-30 lg:hidden"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/85 to-ink lg:hidden" />
-        <div className="absolute -left-32 top-24 h-[28rem] w-[28rem] animate-pulse-glow rounded-full bg-accent/[0.16] blur-[140px]" />
-        <div className="absolute -right-24 bottom-0 h-[22rem] w-[22rem] animate-pulse-glow rounded-full bg-accent/[0.10] blur-[130px] [animation-delay:2s]" />
       </div>
 
       <div className="page-container grid min-h-[calc(100svh-var(--header-h))] flex-1 items-center gap-12 py-12 lg:grid-cols-[1.08fr_0.92fr] snap:min-h-0 snap:py-[4.5vh]">

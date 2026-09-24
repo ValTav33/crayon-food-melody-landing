@@ -6,8 +6,6 @@ import SectionHeading from './SectionHeading';
 export default function Reviews() {
   return (
     <section id="kritikes" aria-label="Κριτικές" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.07] blur-[150px]" />
-
       <div className="page-container relative flex min-h-0 flex-1 flex-col justify-center snap:py-[4.5vh]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading

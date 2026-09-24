@@ -46,16 +46,11 @@ const config: Config = {
         'fade-up': { '0%': { opacity: '0', translate: '0 18px' }, '100%': { opacity: '1', translate: '0 0' } },
         'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
         'scale-in': { '0%': { opacity: '0', scale: '.96' }, '100%': { opacity: '1', scale: '1' } },
-        'pulse-glow': {
-          '0%,100%': { opacity: '0.55', transform: 'scale(1)' },
-          '50%': { opacity: '0.85', transform: 'scale(1.06)' },
-        },
       },
       animation: {
         'fade-up': 'fade-up .7s cubic-bezier(.16,1,.3,1) both',
         'fade-in': 'fade-in .5s ease both',
         'scale-in': 'scale-in .35s cubic-bezier(.16,1,.3,1) both',
-        'pulse-glow': 'pulse-glow 7s ease-in-out infinite',
       },
     },
   },

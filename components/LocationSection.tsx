@@ -12,8 +12,6 @@ export default function LocationSection() {
 
   return (
     <section id="kratisi" aria-label="Κράτηση & Τοποθεσία" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
-      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-accent/[0.12] blur-[120px]" />
-
       <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 snap:py-[4.5vh]">
         <div className="flex flex-col justify-center">
           <Reveal className="flex items-center gap-3">
