@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { CalendarCheck, MessageCircle, Phone } from 'lucide-react';
-import { venue, whatsappHref } from '@/lib/site';
+import { bookingMessage, venue, whatsappHref } from '@/lib/site';
 import { useBooking } from './BookingProvider';
 
 export default function MobileActionBar() {
@@ -30,7 +30,7 @@ export default function MobileActionBar() {
           <Phone className="h-4 w-4 text-accent-soft" /> Κλήση
         </a>
         <a
-          href={whatsappHref('Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody.')}
+          href={whatsappHref(bookingMessage())}
           target="_blank"
           rel="noreferrer"
           className="flex flex-1 items-center justify-center gap-2 border border-emerald-400/30 bg-emerald-400/[0.10] py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-emerald-300 transition active:scale-[0.97]"

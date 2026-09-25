@@ -28,18 +28,14 @@ export default function StoryGallery() {
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-6">
           <SectionHeading
             eyebrow="Stories"
-            title={<>Η βραδιά σας, πιάτο πιάτο</>}
-            description="Ό,τι βγαίνει από την κουζίνα και το bar μας, όπως ακριβώς το ανεβάζουμε κάθε βράδυ. Πατήστε ένα story για να το δείτε ολόκληρο."
+            title={<>Απόψε στο {venue.shortName}</>}
+            description="Από την κουζίνα, το bar και τη σκηνή μας, όπως ακριβώς τα ανεβάζουμε κάθε βράδυ. Πατήστε ένα story για να το δείτε ολόκληρο."
           />
           <div className="flex items-center gap-2">
-            <a
-              href={`https://instagram.com/${venue.social.instagram}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 border border-white/15 bg-white/[0.04] px-4 py-3 text-[0.78rem] font-bold uppercase tracking-[0.12em] text-white/75 transition hover:border-white/60 hover:text-white"
-            >
+            {/* demo: the handle is shown, not linked */}
+            <span className="inline-flex items-center gap-2 border border-white/15 bg-white/[0.04] px-4 py-3 text-[0.78rem] font-bold uppercase tracking-[0.12em] text-white/75">
               <Instagram className="h-4 w-4" /> @{venue.social.instagram}
-            </a>
+            </span>
             <div className="hidden gap-2 lg:flex">
               <button
                 onClick={() => scrollRail(-1)}
@@ -90,7 +86,7 @@ function StoryCard({ story, index, onOpen }: { story: Story; index: number; onOp
     >
       <Image
         src={story.image}
-        alt={story.caption || 'Story από το Crayon'}
+        alt={story.caption || `Story από το ${venue.shortName}`}
         fill
         sizes="(max-width: 640px) 62vw, (max-width: 1024px) 30vw, 18vw"
         className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
@@ -113,7 +109,7 @@ function StoryCard({ story, index, onOpen }: { story: Story; index: number; onOp
       </div>
       <div className="absolute inset-x-3 top-7 flex items-center gap-2">
         <StoryAvatar size="h-7 w-7" />
-        <span className="truncate text-[0.7rem] font-semibold text-white/95 drop-shadow">crayonfoodmelody</span>
+        <span className="truncate text-[0.7rem] font-semibold text-white/95 drop-shadow">{venue.social.instagram}</span>
         <span className="shrink-0 text-[0.68rem] text-white/60">{story.time}</span>
       </div>
 
@@ -134,7 +130,7 @@ function StoryCard({ story, index, onOpen }: { story: Story; index: number; onOp
 function StoryAvatar({ size }: { size: string }) {
   return (
     <span className={`relative block shrink-0 overflow-hidden rounded-full bg-black ring-[1.5px] ring-accent ${size}`}>
-      <Image src="/images/brand/logo-mark.png" alt="" fill sizes="36px" className="object-contain p-[2px]" />
+      <Image src="/images/brand/logo-mark.webp" alt="" fill sizes="36px" className="object-contain p-[2px]" />
     </span>
   );
 }
@@ -232,7 +228,7 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
         <Image
           key={story.id}
           src={story.image}
-          alt={story.caption || 'Story από το Crayon'}
+          alt={story.caption || `Story από το ${venue.shortName}`}
           fill
           priority
           sizes="(max-width: 640px) 100vw, 520px"
@@ -319,15 +315,14 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
             >
               Κράτηση τραπεζιού
             </button>
-            <a
-              href={`https://instagram.com/${venue.social.instagram}`}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-white/25 bg-white/10 p-3.5 text-white backdrop-blur-md transition hover:bg-white/20"
-              aria-label="Instagram"
+            <span
+              className="border border-white/25 bg-white/10 p-3.5 text-white backdrop-blur-md"
+              role="img"
+              aria-label={`Instagram @${venue.social.instagram}`}
+              title={`@${venue.social.instagram}`}
             >
               <Instagram className="h-4 w-4" />
-            </a>
+            </span>
           </div>
         </div>
       </div>

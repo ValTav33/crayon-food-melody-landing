@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ArrowDown, Clock3, MapPin, MessageCircle } from 'lucide-react';
-import { venue, whatsappHref } from '@/lib/site';
+import { bookingMessage, venue, whatsappHref } from '@/lib/site';
 import { useBooking } from './BookingProvider';
 
 const SLIDES = [
-  { image: '/images/food/food-14.jpg', label: 'Το bar μας' },
-  { image: '/images/food/food-11.jpg', label: 'Σουτζουκάκια με χειροποίητες πένες' },
-  { image: '/images/food/food-6.jpg', label: 'Μοσχαρίσιο μάγουλο σε ριζότο' },
+  { image: '/images/food/steak.webp', label: 'Tagliata Black Angus, δίπλα στη σκηνή' },
+  { image: '/images/food/cocktail.webp', label: 'Signature cocktails στο bar' },
+  { image: '/images/atmosphere/lounge.webp', label: 'Το Velvet lounge' },
 ];
 const SLIDE_MS = 5500;
 // Same `sizes` on the phone backdrop and the desktop panel, so both resolve to one URL
@@ -49,19 +49,18 @@ export default function Hero() {
           <div className="inline-flex animate-fade-up items-center gap-2.5 border border-accent/35 bg-accent/[0.08] px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 bg-accent-soft" />
             <span className="text-[0.66rem] font-bold uppercase tracking-[0.2em] text-accent-soft sm:text-[0.72rem] sm:tracking-[0.24em]">
-              Νέα σεζόν · Live κάθε Παρασκευή & Σάββατο
+              {venue.tagline}
             </span>
           </div>
 
-          <h1 className="mt-7 animate-fade-up text-[2.6rem] font-normal leading-[1.05] tracking-tight text-chalk [animation-delay:.08s] sm:text-6xl snap:mt-[3.2vh] snap:text-[length:clamp(2.4rem,min(8.2vh,4.7vw),4.8rem)]">
-            Εκεί που η γεύση
-            <br />
-            συναντά τη <span className="accent-word">μελωδία</span>.
+          <h1 className="mt-7 animate-fade-up text-[2.15rem] font-normal leading-[1.08] tracking-tight text-chalk [animation-delay:.08s] sm:text-5xl snap:mt-[3.2vh] snap:text-[length:clamp(2.1rem,min(6.6vh,3.8vw),3.9rem)]">
+            Εκεί που η υψηλή γαστρονομία συναντά τη μεγαλύτερη{' '}
+            <span className="accent-word">live σκηνή</span> της πόλης.
           </h1>
 
           <p className="mt-6 max-w-xl animate-fade-up text-[1.02rem] leading-relaxed text-white/65 [animation-delay:.16s] sm:text-lg snap:mt-[2.8vh]">
-            Ζωντανή ελληνική μουσική, προσεγμένες γεύσεις και μοναδική ατμόσφαιρα κάθε Παρασκευή &
-            Σάββατο στον Εύοσμο.
+            Fine dining, signature cocktails και headliners στη live σκηνή, κάθε Πέμπτη έως Κυριακή
+            στην καρδιά της περιοχής FIX.
           </p>
 
           <div className="mt-9 flex animate-fade-up flex-col gap-3 [animation-delay:.24s] sm:flex-row sm:items-center snap:mt-[4vh]">
@@ -74,13 +73,21 @@ export default function Hero() {
           </div>
 
           <div className="mt-12 flex animate-fade-up flex-col gap-5 border-t border-white/10 pt-6 [animation-delay:.32s] sm:flex-row sm:divide-x sm:divide-white/10 snap:mt-[5vh] snap:pt-[3vh]">
-            <TrustItem icon={<MapPin className="h-4 w-4" />} label="Αντώνη Τρίτση 94" sub="Εύοσμος, Θεσσαλονίκη" />
-            <TrustItem icon={<Clock3 className="h-4 w-4" />} label="Έναρξη 21:30" sub="Πόρτες 21:00" />
+            <TrustItem
+              icon={<MapPin className="h-4 w-4" />}
+              label={venue.address}
+              sub={`${venue.areaShort}, ${venue.city}`}
+            />
+            <TrustItem
+              icon={<Clock3 className="h-4 w-4" />}
+              label={`${venue.hours.openDaysShort} · Live ${venue.hours.liveStart}`}
+              sub={`Ανοιχτά έως ${venue.hours.close}`}
+            />
             <TrustItem
               icon={<MessageCircle className="h-4 w-4" />}
               label={venue.phones.mobile}
               sub="Κρατήσεις & WhatsApp"
-              href={whatsappHref('Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody.')}
+              href={whatsappHref(bookingMessage())}
             />
           </div>
         </div>
@@ -119,9 +126,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* the logo's line-art face as a stamp over the frame corner, like on the banner */}
+          {/* the logo's V-and-clef mark as a stamp over the frame corner */}
           <div className="pointer-events-none absolute -bottom-6 -left-8 aspect-square w-[clamp(96px,24%,150px)] border border-white/10 bg-ink p-3 shadow-card">
-            <Image src="/images/brand/logo-mark.png" alt="" fill sizes="150px" className="object-contain p-2" />
+            <Image src="/images/brand/logo-mark.webp" alt="" fill sizes="150px" className="object-contain p-2" />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
-import { BookOpen, UtensilsCrossed } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { menuCategories } from '@/lib/site';
 import FullMenuModal from './FullMenuModal';
 import Reveal from './Reveal';
@@ -22,9 +22,9 @@ export default function MenuTeaser() {
       <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14 snap:items-center snap:py-[4.5vh]">
         <div className="flex flex-col">
           <SectionHeading
-            eyebrow="Γεύσεις & Cocktails"
-            title={<>Η κουζίνα μας, με άποψη</>}
-            description="Ελληνικές πρώτες ύλες, σύγχρονες τεχνικές και μια λίστα ποτών φτιαγμένη για μεγάλες βραδιές."
+            eyebrow="Stage & Dine"
+            title={<>Από το πιάτο στη σκηνή</>}
+            description="Black Angus, raw bar και signature cocktails — και bottle service στο τραπέζι μόλις ανάψει η σκηνή."
           />
 
           <Reveal
@@ -70,10 +70,11 @@ export default function MenuTeaser() {
                 as="article"
                 key={item.name}
                 delay={i * 60}
-                className="group flex items-stretch gap-4 card-surface p-4 transition-colors duration-300 hover:border-accent/35 sm:p-5"
+                // an odd last card spans the row, so 3-item categories leave no hole
+                className="group flex items-stretch gap-4 card-surface p-4 transition-colors duration-300 hover:border-accent/35 sm:p-5 sm:last:odd:col-span-2"
               >
-                <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden bg-white/[0.04] ring-1 ring-white/[0.07] sm:h-24 sm:w-24">
-                  {item.image ? (
+                {item.image && (
+                  <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden bg-white/[0.04] ring-1 ring-white/[0.07] sm:h-24 sm:w-24">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -81,12 +82,8 @@ export default function MenuTeaser() {
                       sizes="96px"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                  ) : (
-                    <span className="flex h-full w-full items-center justify-center text-white/20">
-                      <UtensilsCrossed className="h-6 w-6" />
-                    </span>
-                  )}
-                </div>
+                  </div>
+                )}
 
                 <div className="flex min-w-0 flex-1 flex-col">
                   <h3 className="text-[1.08rem] leading-snug text-chalk">{item.name}</h3>
@@ -99,7 +96,7 @@ export default function MenuTeaser() {
                     ) : (
                       <span />
                     )}
-                    <span className="font-display text-[1.15rem] text-accent-soft">{item.price}</span>
+                    <span className="whitespace-nowrap font-display text-[1.15rem] text-accent-soft">{item.price}</span>
                   </div>
                 </div>
               </Reveal>

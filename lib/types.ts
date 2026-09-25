@@ -1,15 +1,22 @@
+export type PriceTier = { label: string; price: string };
+
+/** A weekly residency: it repeats on `days`, so it has no calendar date. */
 export type EventItem = {
   id: string;
   title: string;
-  subtitle: string;
-  artists: string[];
-  dateDisplay: string;
-  dateShort: string;
-  time: string;
+  headliners: string[];
+  schedule: string;
+  days: string[];
+  arrival: string;
+  /** when the stage starts, if not at arrival */
+  liveStart?: string;
   genre: string;
   badge: string;
+  description: string;
   image: string;
   seats: string;
+  pricing: PriceTier[];
+  pricingNote?: string;
 };
 
 export type MenuItem = {

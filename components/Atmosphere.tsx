@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { gallery } from '@/lib/site';
+import { gallery, venue } from '@/lib/site';
 import Reveal from './Reveal';
 import SectionHeading from './SectionHeading';
 
@@ -18,8 +18,8 @@ export default function Atmosphere() {
         <SectionHeading
           className="shrink-0"
           eyebrow="Ατμόσφαιρα"
-          title={<>Μια βραδιά στο Crayon</>}
-          description="Χαμηλός φωτισμός, ζεστά τραπέζια, μια σκηνή που δεν σταματά και παρέες που μένουν μέχρι αργά."
+          title={<>Μια βραδιά στο {venue.shortName}</>}
+          description={`Βελούδινα booths, χρυσός φωτισμός, προσεγμένο δείπνο και μια live σκηνή που δεν σβήνει πριν τις ${venue.hours.close}.`}
         />
 
         {/* 8 photos pack exactly into 4×3; on desktop the rows stretch to fill the screen */}
