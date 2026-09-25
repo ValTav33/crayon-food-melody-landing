@@ -8,8 +8,8 @@
 :root {
   --ink: #0a0a0a;
   --ink-card: #131313;
-  --accent: #c41c47;
-  --accent-soft: #ec4a73;
+  --accent: #d0af6c;
+  --accent-soft: #e6ca84;
   --header-h: 68px;
   /* width the labelled section rail occupies on the left (xl+) */
   --rail-w: 176px;
@@ -34,7 +34,7 @@
     overflow-x: hidden;
   }
   ::selection {
-    background: rgba(196, 28, 71, 0.45);
+    background: rgba(208, 175, 108, 0.4);
     color: #fff;
   }
   :focus-visible {
@@ -103,12 +103,12 @@
     @apply border border-white/[0.07];
   }
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 bg-accent px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 active:scale-[0.98];
-    box-shadow: 0 12px 30px -14px rgba(196, 28, 71, 0.8);
+    @apply relative inline-flex items-center justify-center gap-2 bg-accent px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-ink transition-all duration-300 active:scale-[0.98];
+    box-shadow: 0 12px 30px -14px rgba(208, 175, 108, 0.7);
   }
   .btn-primary:hover {
-    background-color: #d62553;
-    box-shadow: 0 16px 40px -12px rgba(196, 28, 71, 0.95);
+    background-color: var(--accent-soft);
+    box-shadow: 0 16px 40px -12px rgba(208, 175, 108, 0.85);
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 border border-white/25 bg-white/[0.03] px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-chalk backdrop-blur-md transition-all duration-300 hover:border-white/80 hover:bg-white/[0.08] active:scale-[0.98];
@@ -120,9 +120,9 @@
     @apply text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-accent-soft;
   }
   .rule-accent {
-    background: linear-gradient(90deg, transparent, rgba(236, 74, 115, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(230, 202, 132, 0.7), transparent);
   }
-  /* the one highlighted word in a headline, echoing the script "Crayon" */
+  /* the one highlighted word in a headline, in the gold of the logo */
   .accent-word {
     @apply font-display italic text-accent-soft;
   }

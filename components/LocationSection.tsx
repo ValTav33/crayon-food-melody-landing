@@ -136,7 +136,7 @@ function MockMap() {
         className="absolute inset-x-0 top-[46%] mt-4 h-[2px]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(90deg, rgba(236,74,115,0.4) 0 14px, transparent 14px 28px)',
+            'repeating-linear-gradient(90deg, rgba(230,202,132,0.35) 0 14px, transparent 14px 28px)',
         }}
       />
 
@@ -167,7 +167,7 @@ function MockMap() {
           href={venue.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#d62553]"
+          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink transition hover:bg-accent-soft"
         >
           Οδηγίες στο Maps
         </a>

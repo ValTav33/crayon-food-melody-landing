@@ -123,7 +123,7 @@ function StoryCard({ story, index, onOpen }: { story: Story; index: number; onOp
             {story.caption}
           </p>
         )}
-        <span className="mt-2 inline-flex items-center gap-1.5 border border-white/25 bg-white/10 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md transition group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+        <span className="mt-2 inline-flex items-center gap-1.5 border border-white/25 bg-white/10 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md transition group-hover:border-accent group-hover:bg-accent group-hover:text-ink">
           <Play className="h-2.5 w-2.5 fill-current" /> Προβολή
         </span>
       </div>

@@ -39,7 +39,7 @@ export default function MobileActionBar() {
         </a>
         <button
           onClick={() => open()}
-          className="flex flex-[1.2] items-center justify-center gap-2 bg-accent py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-white shadow-glow-sm transition active:scale-[0.97]"
+          className="flex flex-[1.2] items-center justify-center gap-2 bg-accent py-3 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-ink shadow-glow-sm transition active:scale-[0.97]"
         >
           <CalendarCheck className="h-4 w-4" /> Κράτηση
         </button>

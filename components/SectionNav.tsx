@@ -44,7 +44,7 @@ export default function SectionNav() {
                   <span
                     className={`block transition-[width,height,background-color,border-color,box-shadow] duration-200 ${
                       isActive
-                        ? 'h-[10px] w-[10px] bg-accent shadow-[0_0_14px_2px_rgba(196,28,71,0.6)]'
+                        ? 'h-[10px] w-[10px] bg-accent shadow-[0_0_14px_2px_rgba(208,175,108,0.55)]'
                         : isPast
                           ? 'h-[6px] w-[6px] bg-accent'
                           : 'h-[6px] w-[6px] border border-white/40 bg-ink group-hover:border-white'

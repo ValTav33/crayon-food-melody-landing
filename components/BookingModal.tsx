@@ -165,7 +165,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
                       onClick={() => setParty(size)}
                       className={`h-8 min-w-8 px-2 text-sm font-semibold transition ${
                         party === size
-                          ? 'bg-accent text-white'
+                          ? 'bg-accent text-ink'
                           : 'bg-white/[0.06] text-muted hover:bg-white/[0.12] hover:text-chalk'
                       }`}
                     >

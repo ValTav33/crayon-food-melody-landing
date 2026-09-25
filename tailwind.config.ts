@@ -26,9 +26,11 @@ const config: Config = {
       },
       colors: {
         ink: { DEFAULT: '#0a0a0a', card: '#131313', raised: '#1b1b1b' },
-        // Brand crimson, sampled from the logo lips and the "&" of "food & melody".
-        // `soft` is the tint used for text on black (passes AA contrast).
-        accent: { DEFAULT: '#c41c47', soft: '#ec4a73', deep: '#8f1233' },
+        // Brand gold, sampled from the Velvet logo. Text on a gold fill is `ink`, never white.
+        // `soft` is the highlight tint used for text on black.
+        accent: { DEFAULT: '#d0af6c', soft: '#e6ca84', deep: '#9a7a3c' },
+        // Velvet crimson: the atmosphere (background bubbles) and urgency cues.
+        velvet: { DEFAULT: '#c41c47', soft: '#ec4a73', deep: '#8f1233' },
         chalk: '#f9fafb',
         muted: '#9ca3af',
       },
@@ -37,8 +39,8 @@ const config: Config = {
         display: ['var(--font-display)', 'Georgia', 'serif'],
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(196,28,71,0.4), 0 18px 50px -12px rgba(196,28,71,0.45)',
-        'glow-sm': '0 10px 30px -12px rgba(196,28,71,0.6)',
+        glow: '0 0 0 1px rgba(208,175,108,0.4), 0 18px 50px -12px rgba(208,175,108,0.35)',
+        'glow-sm': '0 10px 30px -12px rgba(208,175,108,0.55)',
         card: '0 24px 60px -30px rgba(0,0,0,0.9)',
       },
       keyframes: {

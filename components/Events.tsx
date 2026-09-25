@@ -68,7 +68,7 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
         <div className="absolute inset-x-0 bottom-0 p-5 pb-4">
           <span
             className={`inline-flex items-center gap-1.5 px-2 py-1 text-[0.62rem] font-bold uppercase tracking-[0.16em] backdrop-blur-md ${
-              lastSeats ? 'bg-accent text-white' : 'border border-white/25 bg-black/50 text-white/85'
+              lastSeats ? 'bg-velvet text-white' : 'border border-white/25 bg-black/50 text-white/85'
             }`}
           >
             <span className={`h-1.5 w-1.5 ${lastSeats ? 'animate-pulse bg-white' : 'bg-emerald-400'}`} />
@@ -100,7 +100,7 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
 
         <button
           onClick={() => open(`${event.title} · ${event.dateDisplay}`)}
-          className="w-full border border-accent/50 bg-accent/[0.08] py-3 text-[0.78rem] font-bold uppercase tracking-[0.16em] text-chalk transition-all duration-300 hover:border-accent hover:bg-accent active:scale-[0.98]"
+          className="w-full border border-accent/50 bg-accent/[0.08] py-3 text-[0.78rem] font-bold uppercase tracking-[0.16em] text-chalk transition-all duration-300 hover:border-accent hover:bg-accent hover:text-ink active:scale-[0.98]"
         >
           Κράτηση για αυτή τη βραδιά
         </button>
