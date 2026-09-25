@@ -12,6 +12,9 @@ const SLIDES = [
   { image: '/images/food/food-6.jpg', label: 'Μοσχαρίσιο μάγουλο σε ριζότο' },
 ];
 const SLIDE_MS = 5500;
+// Same `sizes` on the phone backdrop and the desktop panel, so both resolve to one URL
+// (one download) instead of two copies of the first slide.
+const HERO_SIZES = '(min-width: 1024px) 42vw, 100vw';
 
 export default function Hero() {
   const { open } = useBooking();
@@ -35,7 +38,7 @@ export default function Hero() {
           alt=""
           fill
           priority
-          sizes="100vw"
+          sizes={HERO_SIZES}
           className="object-cover opacity-30 lg:hidden"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/85 to-ink lg:hidden" />
@@ -93,7 +96,7 @@ export default function Hero() {
                 alt={s.label}
                 fill
                 priority={i === 0}
-                sizes="(min-width: 1024px) 42vw, 1px"
+                sizes={HERO_SIZES}
                 className={`object-cover transition-[opacity,transform] duration-[1400ms] ease-out ${
                   i === slide ? 'scale-100 opacity-100' : 'scale-[1.06] opacity-0'
                 }`}

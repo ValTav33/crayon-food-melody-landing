@@ -14,6 +14,7 @@ export default function SiteFooter() {
               alt="Crayon Food & Melody"
               width={448}
               height={284}
+              sizes="120px"
               className="h-[76px] w-auto"
             />
             <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-white/50">

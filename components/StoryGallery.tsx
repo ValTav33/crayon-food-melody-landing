@@ -141,7 +141,6 @@ function StoryAvatar({ size }: { size: string }) {
 
 function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () => void }) {
   const [index, setIndex] = useState(startIndex);
-  const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false);
   const { open } = useBooking();
   const touchStart = useRef<{ x: number; y: number } | null>(null);
@@ -153,35 +152,13 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
       onClose();
       return;
     }
-    setProgress(0);
     setIndex(index + 1);
   }, [index, onClose]);
 
   const goPrev = useCallback(() => {
     if (index === 0) return;
-    setProgress(0);
     setIndex(index - 1);
   }, [index]);
-
-  // auto-advance
-  useEffect(() => {
-    if (paused) return;
-    let raf = 0;
-    let start: number | null = null;
-    const tick = (ts: number) => {
-      if (start === null) start = ts - progress * STORY_DURATION;
-      const ratio = Math.min(1, (ts - start) / STORY_DURATION);
-      setProgress(ratio);
-      if (ratio >= 1) {
-        goNext();
-        return;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, paused, goNext]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -277,14 +254,22 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
         <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/85 to-transparent" />
 
-        {/* progress */}
-        <div className="absolute inset-x-3 top-3 z-10 flex gap-1">
+        {/* progress: the current segment fills with a CSS animation (.story-progress) and
+            its end auto-advances, so nothing re-renders while a story plays */}
+        <div
+          className="absolute inset-x-3 top-3 z-10 flex gap-1"
+          style={{ '--story-ms': `${STORY_DURATION}ms` } as React.CSSProperties}
+        >
           {stories.map((s, i) => (
             <span key={s.id} className="h-[3px] flex-1 overflow-hidden bg-white/25">
-              <span
-                className="block h-full bg-white"
-                style={{ width: i < index ? '100%' : i === index ? `${progress * 100}%` : '0%' }}
-              />
+              {i < index && <span className="block h-full bg-white" />}
+              {i === index && (
+                <span
+                  className="story-progress block h-full bg-white"
+                  style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                  onAnimationEnd={goNext}
+                />
+              )}
             </span>
           ))}
         </div>

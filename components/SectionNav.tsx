@@ -1,7 +1,7 @@
 'use client';
 
 import { SECTIONS } from '@/lib/site';
-import { useActiveSection } from '@/lib/useActiveSection';
+import { markNavigation, useActiveSection } from '@/lib/useActiveSection';
 
 /**
  * Fixed rail on the left edge. Labels are always visible from 1280px (the page
@@ -21,9 +21,11 @@ export default function SectionNav() {
       <ol className="relative">
         {/* track + progress, running between the first and last marker centres */}
         <span className="absolute bottom-5 left-[4.5px] top-5 w-px bg-white/15" aria-hidden="true">
+          {/* scaleY, not height: animates on the compositor, no layout per frame */}
           <span
-            className="absolute inset-x-0 top-0 bg-accent transition-[height] duration-700 ease-out"
-            style={{ height: `${progress * 100}%` }}
+            data-rail-progress
+            className="absolute inset-0 origin-top bg-accent transition-transform duration-300 ease-out"
+            style={{ transform: `scaleY(${progress})` }}
           />
         </span>
 
@@ -34,12 +36,13 @@ export default function SectionNav() {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
+                onClick={() => markNavigation(section.id)}
                 aria-current={isActive ? 'true' : undefined}
                 className="group relative flex h-10 items-center gap-3.5 outline-none"
               >
                 <span className="relative flex h-[10px] w-[10px] shrink-0 items-center justify-center">
                   <span
-                    className={`block transition-all duration-500 ${
+                    className={`block transition-[width,height,background-color,border-color,box-shadow] duration-200 ${
                       isActive
                         ? 'h-[10px] w-[10px] bg-accent shadow-[0_0_14px_2px_rgba(196,28,71,0.6)]'
                         : isPast
@@ -49,7 +52,7 @@ export default function SectionNav() {
                   />
                 </span>
                 <span
-                  className={`whitespace-nowrap text-[0.8rem] font-medium tracking-wide transition-all duration-300
+                  className={`whitespace-nowrap text-[0.8rem] font-medium tracking-wide transition-[opacity,transform,color] duration-200
                     pointer-events-none -translate-x-1 border border-white/10 bg-ink/90 px-2 py-1 opacity-0 backdrop-blur-md
                     group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100
                     xl:pointer-events-auto xl:translate-x-0 xl:border-transparent xl:bg-transparent xl:p-0 xl:opacity-100 xl:backdrop-blur-none
