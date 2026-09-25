@@ -4,7 +4,8 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 import BookingModal from './BookingModal';
 
 type BookingContextValue = {
-  open: (occasion?: string) => void;
+  /** `eventId` shows that night's details and prices in the form */
+  open: (occasion?: string, eventId?: string) => void;
   close: () => void;
 };
 
@@ -19,9 +20,11 @@ export function useBooking() {
 export default function BookingProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [occasion, setOccasion] = useState<string | undefined>(undefined);
+  const [eventId, setEventId] = useState<string | undefined>(undefined);
 
-  const open = useCallback((next?: string) => {
+  const open = useCallback((next?: string, nextEventId?: string) => {
     setOccasion(next);
+    setEventId(nextEventId);
     setIsOpen(true);
   }, []);
 
@@ -32,7 +35,7 @@ export default function BookingProvider({ children }: { children: React.ReactNod
   return (
     <BookingContext.Provider value={value}>
       {children}
-      <BookingModal isOpen={isOpen} occasion={occasion} onClose={close} />
+      <BookingModal isOpen={isOpen} occasion={occasion} eventId={eventId} onClose={close} />
     </BookingContext.Provider>
   );
 }

@@ -18,13 +18,13 @@ const sans = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'Crayon Food & Melody · Live μουσική & γεύση στον Εύοσμο',
+  title: 'Velvet Stage & Dine · Fine dining & live σκηνή στη Θεσσαλονίκη',
   description:
-    'Ζωντανή ελληνική μουσική, προσεγμένες γεύσεις και μοναδική ατμόσφαιρα κάθε Παρασκευή & Σάββατο στην Αντώνη Τρίτση 94, Εύοσμος Θεσσαλονίκης. Κρατήσεις: 231 070 5900.',
-  keywords: ['Crayon Food & Melody', 'live Θεσσαλονίκη', 'Εύοσμος', 'μεζεδοπωλείο', 'ζωντανή μουσική'],
+    'Υψηλή γαστρονομία, premium bottle service και headliners στη live σκηνή, Πέμπτη έως Κυριακή στην 26ης Οκτωβρίου 48, περιοχή FIX, Θεσσαλονίκη. Κρατήσεις: 2310 000 000.',
+  keywords: ['Velvet Stage & Dine', 'live Θεσσαλονίκη', 'FIX', 'Σφαγεία', 'fine dining', 'live σκηνή', 'dinner show'],
   openGraph: {
-    title: 'Crayon Food & Melody',
-    description: 'Εκεί που η γεύση συναντά τη μελωδία · Live κάθε Παρασκευή & Σάββατο στον Εύοσμο.',
+    title: 'Velvet Stage & Dine',
+    description: 'Εκεί που η υψηλή γαστρονομία συναντά τη μεγαλύτερη live σκηνή της πόλης.',
     locale: 'el_GR',
     type: 'website',
   },

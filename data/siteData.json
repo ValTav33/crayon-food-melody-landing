@@ -1,125 +1,245 @@
 {
   "venue": {
-    "name": "Crayon Food & Melody",
-    "tagline": "Εκεί που η γεύση συναντά τη μελωδία",
-    "address": "Αντώνη Τρίτση 94, Εύοσμος 562 24",
+    "name": "Velvet Stage & Dine",
+    "shortName": "Velvet",
+    "tagline": "Γαστρονομία • Premium Nightlife • Η Απόλυτη Live Εμπειρία",
+    "address": "26ης Οκτωβρίου 48",
+    "postcode": "546 27",
+    "street": "26ης Οκτωβρίου",
+    "area": "FIX / Σφαγεία",
+    "areaShort": "FIX",
     "city": "Θεσσαλονίκη",
     "phones": {
-      "landline": "231 070 5900",
-      "mobile": "6931 935 703"
+      "landline": "2310 000 000",
+      "mobile": "690 000 0000"
     },
     "phoneLinks": {
-      "landline": "+302310705900",
-      "mobile": "+306931935703"
+      "landline": "+302310000000",
+      "mobile": "+306900000000"
+    },
+    "emails": {
+      "reservations": "reservations@velvetstage.gr",
+      "info": "info@velvetstage.gr"
     },
     "social": {
-      "instagram": "crayonfoodmelody",
-      "facebook": "Crayon Food & Melody"
+      "instagram": "velvet.stagedine",
+      "tiktok": "velvetstage",
+      "facebook": "Velvet Stage & Dine SKG"
     },
-    "operatingHours": "Παρασκευή & Σάββατο από τις 21:00",
+    "hours": {
+      "schedule": [
+        {
+          "days": "Πέμπτη – Σάββατο",
+          "time": "21:30 – 05:30"
+        },
+        {
+          "days": "Κυριακή",
+          "time": "21:00 – 05:30"
+        },
+        {
+          "days": "Δευτέρα – Τετάρτη",
+          "time": "Closed / Private Events"
+        }
+      ],
+      "openDays": "Πέμπτη – Κυριακή",
+      "openDaysShort": "Πέμ – Κυρ",
+      "compact": "Από 21:30 · Κυρ από 21:00",
+      "liveStart": "21:30",
+      "close": "05:30"
+    },
     "rating": {
-      "score": "3,9",
-      "count": 157,
-      "source": "Google"
+      "score": "4,7",
+      "value": 4.7,
+      "count": "240+"
     },
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Crayon+Food+%26+Melody+Antoni+Tritsi+94+Evosmos"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=26%CE%B7%CF%82+%CE%9F%CE%BA%CF%84%CF%89%CE%B2%CF%81%CE%AF%CE%BF%CF%85+48%2C+546+27+%CE%98%CE%B5%CF%83%CF%83%CE%B1%CE%BB%CE%BF%CE%BD%CE%AF%CE%BA%CE%B7"
   },
   "upcomingEvents": [
     {
-      "id": "event-1",
-      "title": "Season Opening Live",
-      "subtitle": "Έναρξη χειμερινής σεζόν με ανανεωμένο μουσικό σχήμα",
-      "artists": [
-        "Ευαγγελία Μπεχλιβάνη",
-        "Αλέξανδρος Σαγκούρης",
-        "Κατερίνα Σταμπολάκη"
+      "id": "utopia-nights",
+      "title": "Utopia Nights",
+      "headliners": [
+        "Travis Scott"
       ],
-      "dateDisplay": "Παρασκευή & Σάββατο",
-      "dateShort": "25/09",
-      "time": "21:30",
-      "genre": "Λαϊκό & Έντεχνο Πρόγραμμα",
-      "badge": "Opening Night",
-      "image": "/images/events/opening-team.jpg",
-      "seats": "Τελευταία τραπέζια"
+      "schedule": "Κάθε Παρασκευή & Σάββατο",
+      "days": [
+        "ΠΑΡ",
+        "ΣΑΒ"
+      ],
+      "arrival": "23:30",
+      "genre": "Hip-Hop / Rage · Live Show",
+      "badge": "Weekend Headliner",
+      "description": "Ένα ψυχεδελικό ταξίδι από φως, καπνό και bass. Τα rage anthems του Travis Scott ζωντανά σε ένα immersive stage show με lasers και CO₂ jets, που κρατά την ενέργεια στο κόκκινο μέχρι το ξημέρωμα.",
+      "image": "/images/events/utopia-nights.webp",
+      "seats": "Τελευταία τραπέζια",
+      "pricing": [
+        {
+          "label": "Είσοδος με ποτό",
+          "price": "20€"
+        },
+        {
+          "label": "Φιάλη απλή",
+          "price": "180€"
+        },
+        {
+          "label": "Φιάλη Premium",
+          "price": "240€"
+        }
+      ],
+      "pricingNote": "VIP Booth / Stage Front: κατόπιν συνεννόησης · Φιάλη για 4 άτομα"
     },
     {
-      "id": "event-2",
-      "title": "Guest Special Live",
-      "subtitle": "Μία βραδιά γεμάτη ενέργεια με guest φωνές",
-      "artists": [
-        "Αλέξανδρος Σαγκούρης",
-        "Αναστασία Ευθυμιάδου"
+      "id": "nyc-to-athens",
+      "title": "From NYC to Athens",
+      "headliners": [
+        "50 Cent",
+        "Κωνσταντίνος Αργυρός"
       ],
-      "dateDisplay": "Σάββατο Night Live",
-      "dateShort": "09/05",
-      "time": "21:30",
-      "genre": "Σύγχρονο Λαϊκό Πρόγραμμα",
-      "badge": "Guest Star",
-      "image": "/images/events/sagkouris-efthymiadou.jpg",
-      "seats": "Διαθέσιμα τραπέζια"
+      "schedule": "Κάθε Κυριακή",
+      "days": [
+        "ΚΥΡ"
+      ],
+      "arrival": "21:00",
+      "liveStart": "21:30",
+      "genre": "Hip-Hop × Pop-Λαϊκό · Party & Live Stage",
+      "badge": "Sunday Special",
+      "description": "Το απόλυτο κυριακάτικο clubbing project. Τα θρυλικά hip-hop anthems του 50 Cent μπλέκονται με τις σύγχρονες pop-λαϊκές επιτυχίες του Κωνσταντίνου Αργυρού σε ένα εκρηκτικό non-stop party.",
+      "image": "/images/events/nyc-to-athens.webp",
+      "seats": "Διαθέσιμα τραπέζια",
+      "pricing": [
+        {
+          "label": "Είσοδος με ποτό",
+          "price": "15€"
+        },
+        {
+          "label": "Φιάλη απλή",
+          "price": "160€"
+        },
+        {
+          "label": "Φιάλη Premium",
+          "price": "220€"
+        }
+      ],
+      "pricingNote": "Φιάλη για 4 άτομα"
     },
     {
-      "id": "event-3",
-      "title": "Live Duet Night",
-      "subtitle": "Οι μεγαλύτερες επιτυχίες σε μια εκρηκτική βραδιά",
-      "artists": [
-        "Ηλίας Ρωμανός",
-        "Κώστας Μικέλης"
+      "id": "heavyweight-icon",
+      "title": "The Heavyweight Icon",
+      "headliners": [
+        "Light"
       ],
-      "dateDisplay": "Πέμπτη Special Live",
-      "dateShort": "30/04",
-      "time": "22:00",
-      "genre": "Λαϊκό Πρόγραμμα",
-      "badge": "Special Night",
-      "image": "/images/events/romanos-mikelis.jpg",
-      "seats": "Διαθέσιμα τραπέζια"
+      "schedule": "Κάθε Πέμπτη",
+      "days": [
+        "ΠΕΜ"
+      ],
+      "arrival": "23:00",
+      "genre": "Greek Hip-Hop / Trap · Live",
+      "badge": "Thursday Live",
+      "description": "Κάθε Πέμπτη η σκηνή ανήκει στον Light. Βαριά 808s, οι μεγαλύτερες επιτυχίες της ελληνικής trap σκηνής και ένα κοινό που ξέρει κάθε στίχο. Το Σαββατοκύριακο ξεκινά από νωρίς στο Velvet.",
+      "image": "/images/events/heavyweight-icon.webp",
+      "seats": "Διαθέσιμα τραπέζια",
+      "pricing": [
+        {
+          "label": "Είσοδος με ποτό",
+          "price": "20€"
+        },
+        {
+          "label": "Φιάλη απλή",
+          "price": "190€"
+        },
+        {
+          "label": "Φιάλη Premium",
+          "price": "250€"
+        }
+      ],
+      "pricingNote": "Φιάλη για 4 άτομα"
     }
   ],
   "menuCategories": [
     {
-      "id": "appetizers-mains",
-      "title": "Κρεατικά & Μεζέδες",
+      "id": "starters",
+      "title": "Starters & Raw Bar",
       "items": [
         {
-          "name": "Ποικιλία Κρεατικών Crayon",
-          "description": "Μπιφτεκάκια, πανσετάκια, χωριάτικο λουκάνικο και φιλετάκια κοτόπουλο με πατάτες baby",
-          "price": "24,00€",
-          "tag": "Chef's Special",
-          "image": "/images/food/food-12.jpg"
+          "name": "Black Angus Beef Tartare",
+          "description": "Με τραγανό brioche, τρούφα & πίκλα σιναπιού",
+          "price": "18€",
+          "tag": "Chef's Pick",
+          "image": null
         },
         {
-          "name": "Σουτζουκάκια σε Χειροποίητες Πένες",
-          "description": "Σιγομαγειρεμένα σε σάλτσα φρέσκιας ντομάτας με βασιλικό και τριμμένη μυζήθρα",
-          "price": "13,50€",
-          "tag": "Best Seller",
-          "image": "/images/food/food-9.jpg"
-        },
-        {
-          "name": "Μοσχαρίσιο Μάγουλο σε Ριζότο",
-          "description": "Σιγομαγειρεμένο 8 ώρες, κρεμώδες ριζότο παρμεζάνας και λάδι πάπρικας",
-          "price": "16,50€",
-          "tag": "Signature",
-          "image": "/images/food/food-8.jpg"
-        },
-        {
-          "name": "Παπαρδέλες με Μανιτάρια",
-          "description": "Φρέσκια ζύμη, άγρια μανιτάρια, κρέμα τρούφας και φρεσκοτριμμένο πιπέρι",
-          "price": "12,50€",
-          "tag": null,
-          "image": "/images/food/food-7.jpg"
-        },
-        {
-          "name": "Φέτα σε Φύλλο Κρούστας",
-          "description": "Με μέλι, σουσάμι και μαρμελάδα σύκο",
-          "price": "7,50€",
+          "name": "Salmon Carpaccio",
+          "description": "Με ponzu, chili, κόλιανδρο & yuzu pearls",
+          "price": "16€",
           "tag": null,
           "image": null
         },
         {
-          "name": "Σαλάτα Crayon",
-          "description": "Δροσερά ανάμεικτα φύλλα, αποξηραμένα φρούτα, ξηροί καρποί, flakes παρμεζάνας και vinaigrette ροδιού",
-          "price": "8,50€",
+          "name": "Crispy Truffle Arancini",
+          "description": "Με κρέμα άγριων μανιταριών & παρμεζάνα",
+          "price": "13€",
           "tag": null,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "mains",
+      "title": "Mains & Sharing Steaks",
+      "items": [
+        {
+          "name": "Tagliata Black Angus USA",
+          "description": "Με baby πατάτες & gravy δενδρολίβανου",
+          "price": "34€",
+          "tag": "Signature",
+          "image": null
+        },
+        {
+          "name": "Risotto al Tartufo",
+          "description": "Με ποικιλία μανιταριών & flakes μαύρης τρούφας",
+          "price": "19€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Sea Bass Fillet",
+          "description": "Με πουρέ σελινόριζας & emulsion εσπεριδοειδών",
+          "price": "26€",
+          "tag": null,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "bottles",
+      "title": "Bottle Service",
+      "items": [
+        {
+          "name": "Simple Bottle",
+          "description": "Vodka / Gin / Whisky",
+          "price": "160€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Special Bottle",
+          "description": "Black Label, Belvedere, Hendrick's",
+          "price": "190€",
+          "tag": null,
+          "image": null
+        },
+        {
+          "name": "Premium Spirits",
+          "description": "Don Julio Reposado, Macallan 12, Grey Goose",
+          "price": "240€",
+          "tag": "VIP",
+          "image": null
+        },
+        {
+          "name": "Champagne",
+          "description": "Moët & Chandon Brut / Ice Imperial / Dom Pérignon",
+          "price": "220–550€",
+          "tag": "Celebration",
           "image": null
         }
       ]
@@ -129,66 +249,25 @@
       "title": "Signature Cocktails",
       "items": [
         {
-          "name": "Red Velvet Melody",
-          "description": "Premium gin, πουρές άγριων μούρων, lime και άρωμα κανέλας",
-          "price": "10,00€",
+          "name": "Velvet Smoke",
+          "description": "Mezcal, passion fruit, lime, agave, smoked salt",
+          "price": "14€",
           "tag": "Signature",
           "image": null
         },
         {
-          "name": "Smoky Whiskey Sour",
-          "description": "Bourbon whiskey, φρέσκο λεμόνι, σιρόπι μελιού και aromatic bitters",
-          "price": "11,00€",
+          "name": "The Headliner",
+          "description": "Bourbon, amaretto, aromatic bitters, orange oils",
+          "price": "13€",
+          "tag": "Best Seller",
+          "image": null
+        },
+        {
+          "name": "Golden Melody",
+          "description": "Gin, elderflower, yuzu, prosecco splash",
+          "price": "14€",
           "tag": null,
           "image": null
-        },
-        {
-          "name": "Passion Spritz",
-          "description": "Aperol, passion fruit cordial, prosecco και σόδα",
-          "price": "9,00€",
-          "tag": "Popular",
-          "image": null
-        },
-        {
-          "name": "Crayon Espresso Martini",
-          "description": "Vodka, freshly brewed espresso, liqueur καφέ και αλάτι Μαλδόν",
-          "price": "10,00€",
-          "tag": null,
-          "image": null
-        }
-      ]
-    },
-    {
-      "id": "drinks-wine",
-      "title": "Φιάλες & Κρασιά",
-      "items": [
-        {
-          "name": "Απλή Φιάλη Ποτού",
-          "description": "Συνοδεύεται από 4 αναψυκτικά / χυμούς και ξηρούς καρπούς",
-          "price": "85,00€",
-          "tag": "Live Special",
-          "image": null
-        },
-        {
-          "name": "Special Φιάλη Ποτού",
-          "description": "Premium spirits με πλήρη συνοδευτικά για την παρέα",
-          "price": "105,00€",
-          "tag": null,
-          "image": null
-        },
-        {
-          "name": "Κτήμα Βιβλία Χώρα (Λευκό)",
-          "description": "Sauvignon Blanc & Ασύρτικο, 750ml",
-          "price": "34,00€",
-          "tag": null,
-          "image": null
-        },
-        {
-          "name": "Κυρ-Γιάννη «Δύο Ελιές» (Ερυθρό)",
-          "description": "Ξινόμαυρο & Syrah από τη Νάουσα, 750ml",
-          "price": "32,00€",
-          "tag": "Wine List",
-          "image": "/images/food/food-6.jpg"
         }
       ]
     }
@@ -196,116 +275,131 @@
   "stories": [
     {
       "id": "s1",
-      "image": "/images/stories/story-8.jpg",
-      "caption": "Μοσχαρίσιο μάγουλο σε κρεμώδες ριζότο",
-      "time": "2 ώ."
+      "image": "/images/stories/story-1.webp",
+      "caption": "Utopia Nights · κάθε Παρασκευή & Σάββατο",
+      "time": "1 ώ."
     },
     {
       "id": "s2",
-      "image": "/images/stories/story-9.jpg",
-      "caption": "Σουτζουκάκια με χειροποίητες πένες",
-      "time": "4 ώ."
+      "image": "/images/stories/story-2.webp",
+      "caption": "Tagliata Black Angus, δίπλα στη σκηνή",
+      "time": "3 ώ."
     },
     {
       "id": "s3",
-      "image": "/images/stories/story-13.jpg",
-      "caption": "",
-      "time": "6 ώ."
+      "image": "/images/stories/story-3.webp",
+      "caption": "The Headliner: bourbon & orange oils",
+      "time": "5 ώ."
     },
     {
       "id": "s4",
-      "image": "/images/stories/story-7.jpg",
-      "caption": "Παπαρδέλες με άγρια μανιτάρια",
-      "time": "8 ώ."
+      "image": "/images/stories/story-4.webp",
+      "caption": "Κυριακή: 50 Cent × Κωνσταντίνος Αργυρός",
+      "time": "7 ώ."
     },
     {
       "id": "s5",
-      "image": "/images/stories/story-10.jpg",
-      "caption": "Ριζότο μανιταριών με σχοινόπρασο",
-      "time": "12 ώ."
+      "image": "/images/stories/story-5.webp",
+      "caption": "Golden hour, πριν ανάψουν τα φώτα",
+      "time": "9 ώ."
     },
     {
       "id": "s6",
-      "image": "/images/stories/story-11.jpg",
-      "caption": "Ψητά σουτζουκάκια σε σάλτσα ντομάτας",
-      "time": "14 ώ."
+      "image": "/images/stories/story-6.webp",
+      "caption": "Sharing plates για την παρέα",
+      "time": "12 ώ."
     },
     {
       "id": "s7",
-      "image": "/images/stories/story-12.jpg",
-      "caption": "Πανσέτα με πουρέ γλυκοπατάτας",
-      "time": "18 ώ."
+      "image": "/images/stories/story-7.webp",
+      "caption": "Πέμπτη: The Heavyweight Icon · Light",
+      "time": "14 ώ."
     },
     {
       "id": "s8",
-      "image": "/images/stories/story-6.jpg",
-      "caption": "Κρασί & ριζότο υπό το φως των κεριών",
-      "time": "20 ώ."
+      "image": "/images/stories/story-8.webp",
+      "caption": "Late-night bites & cocktails",
+      "time": "18 ώ."
     },
     {
       "id": "s9",
-      "image": "/images/stories/story-14.jpg",
-      "caption": "Caesar, ταρτάρ και ροζέ στο bar",
+      "image": "/images/stories/story-9.webp",
+      "caption": "Η παρέα της Παρασκευής",
       "time": "22 ώ."
     }
   ],
   "gallery": [
     {
-      "image": "/images/atmosphere/stage-lights.jpg",
-      "label": "Live σκηνή",
+      "image": "/images/food/steak.webp",
+      "label": "Δείπνο δίπλα στη σκηνή",
       "span": "tall"
     },
     {
-      "image": "/images/atmosphere/crowd-dance.jpg",
-      "label": "Μέχρι το πρωί",
+      "image": "/images/brand/banner.webp",
+      "label": "Velvet lounge",
       "span": "wide"
     },
     {
-      "image": "/images/food/food-9.jpg",
-      "label": "Από την κουζίνα",
+      "image": "/images/food/sunset-dinner.webp",
+      "label": "Golden hour",
       "span": "normal"
     },
     {
-      "image": "/images/atmosphere/neon-sign.jpg",
-      "label": "Το σήμα μας",
+      "image": "/images/food/pizza.webp",
+      "label": "Sharing plates",
       "span": "normal"
     },
     {
-      "image": "/images/atmosphere/bar-drinks.jpg",
-      "label": "Καθαρά ποτά",
+      "image": "/images/food/late-night.webp",
+      "label": "Μετά τα μεσάνυχτα",
       "span": "normal"
     },
     {
-      "image": "/images/food/food-12.jpg",
-      "label": "Πιάτα με άποψη",
+      "image": "/images/food/cocktail.webp",
+      "label": "Signature bar",
       "span": "tall"
     },
     {
-      "image": "/images/atmosphere/venue-exterior.jpg",
-      "label": "Αντώνη Τρίτση 94",
+      "image": "/images/food/burger.webp",
+      "label": "Η παρέα μας",
       "span": "normal"
     },
     {
-      "image": "/images/atmosphere/guests-table.jpg",
-      "label": "Η παρέα μας",
+      "image": "/images/food/table.webp",
+      "label": "Τραπέζια για παρέες",
       "span": "wide"
     }
   ],
   "reviews": [
     {
-      "author": "john john",
+      "author": "Γιώργος Καραγιάννης",
       "rating": 5,
-      "text": "Πολύ ωραίος χώρος, η εξυπηρέτηση το ίδιο, οι μουσικοί υπέροχοι με καλό ρεπερτόριο τραγουδιών σε κρατούν σε κέφι και χορό συνέχεια, αλλά και τα ποτά καθαρά."
+      "text": "Από τα λίγα μαγαζιά που συνδυάζουν πραγματικό fine dining με live σκηνή. Ο ήχος είναι πεντακάθαρος και το VIP service στο τραπέζι άψογο."
     },
     {
-      "author": "vaia pitaskou",
+      "author": "Ελένη Παπαδοπούλου",
       "rating": 5,
-      "text": "Πάρα πολύ ωραίο φαγητό! Πολύ καλή εξυπηρέτηση και το φαγητό ήρθε αρκετά γρήγορα."
+      "text": "Εκπληκτική εμπειρία! Το φαγητό ξεπέρασε κάθε προσδοκία μας για live club, ειδικά τα steaks και τα signature cocktails. Σίγουρα θα ξαναέρθουμε."
     },
     {
-      "author": "Damianos Dontsidis",
+      "author": "Δημήτρης Βασιλείου",
+      "rating": 4,
+      "text": "Εκρηκτική ενέργεια και απίστευτο stage setup. Παρότι το μαγαζί ήταν sold out, η εξυπηρέτηση της κράτησής μας ήταν ταχύτατη."
+    },
+    {
+      "author": "Χριστίνα Μάνου",
       "rating": 5,
-      "text": "Πάρα πολύ εξυπηρετικό το παιδί στο service, ευγενικός χαμογελαστός και πολύ εξυπηρετικός, όπως επίσης και η κοπέλα!"
+      "text": "Κάναμε την κράτηση online μέσα σε 1 λεπτό και όλα ήταν έτοιμα στην ώρα τους. Ο φωτισμός και η ατμόσφαιρα του χώρου είναι άλλου επιπέδου."
+    },
+    {
+      "author": "Νίκος Αλεξίου",
+      "rating": 5,
+      "text": "Premium εμπειρία από την υποδοχή μέχρι το κλείσιμο του προγράμματος. Το concept φαγητό + show είναι ακριβώς αυτό που έλειπε από τη Θεσσαλονίκη."
+    },
+    {
+      "author": "Σοφία Κωνσταντινίδη",
+      "rating": 4,
+      "text": "Πολύ προσεγμένο μενού κρασιών και premium ποτών. Η ορατότητα στη σκηνή από τα διαζώματα είναι εξαιρετική."
     }
   ]
 }

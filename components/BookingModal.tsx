@@ -12,14 +12,14 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { venue, whatsappHref } from '@/lib/site';
+import { bookingMessage, events, venue, whatsappHref } from '@/lib/site';
 import { useModal } from '@/lib/useModal';
 
-type Props = { isOpen: boolean; occasion?: string; onClose: () => void };
+type Props = { isOpen: boolean; occasion?: string; eventId?: string; onClose: () => void };
 
 const PARTY_SIZES = ['2', '3', '4', '5', '6', '7', '8+'];
 
-export default function BookingModal({ isOpen, occasion, onClose }: Props) {
+export default function BookingModal({ isOpen, occasion, eventId, onClose }: Props) {
   const [sent, setSent] = useState(false);
   const [party, setParty] = useState('4');
   const [name, setName] = useState('');
@@ -46,7 +46,8 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
 
   if (!isOpen) return null;
 
-  const waMessage = `Γεια σας! Θα ήθελα κράτηση στο Crayon Food & Melody${occasion ? ` για «${occasion}»` : ''}.`;
+  const waMessage = bookingMessage(occasion);
+  const event = events.find((e) => e.id === eventId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,11 +71,11 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
         ref={dialogRef}
         className="relative z-10 max-h-[92vh] w-full overflow-y-auto border border-white/10 bg-ink-card shadow-card animate-scale-in sm:max-h-[90vh] sm:w-[min(560px,92vw)]"
       >
-        {/* the Facebook banner at its native proportions: both line-art faces stay in frame */}
-        <div className="relative aspect-[1692/597] w-full overflow-hidden">
+        {/* the brand banner at its native proportions: wordmark and both gold swirls stay in frame */}
+        <div className="relative aspect-[1600/679] w-full overflow-hidden">
           <Image
-            src="/images/brand/banner.jpg"
-            alt="Crayon — food & melody"
+            src="/images/brand/banner.webp"
+            alt={venue.name}
             fill
             sizes="(max-width: 640px) 100vw, 560px"
             className="object-cover"
@@ -93,11 +94,27 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
           <div>
             <p className="eyebrow">Κράτηση τραπεζιού</p>
             <h3 className="mt-2 text-2xl font-medium text-chalk sm:text-[1.75rem]">
-              {occasion ? occasion : 'Κλείστε το τραπέζι σας'}
+              {event?.title ?? occasion ?? 'Κλείστε το τραπέζι σας'}
             </h3>
             <p className="mt-1.5 text-sm text-muted">
-              {venue.operatingHours} · Έναρξη προγράμματος 21:30
+              {event
+                ? `${event.schedule} · Προσέλευση ${event.arrival}${event.liveStart ? ` · Live ${event.liveStart}` : ''}`
+                : `${venue.hours.openDays} · Live stage από ${venue.hours.liveStart}`}
             </p>
+            {event && (
+              <>
+                <p className="mt-3 text-[0.88rem] leading-relaxed text-white/60">{event.description}</p>
+                <dl className="mt-4 grid grid-cols-3 border border-white/[0.08]">
+                  {event.pricing.map((tier) => (
+                    <div key={tier.label} className="flex flex-col justify-between gap-1 border-l border-white/[0.08] px-3 py-2.5 first:border-l-0">
+                      <dt className="text-[0.58rem] font-bold uppercase leading-tight tracking-[0.1em] text-muted">{tier.label}</dt>
+                      <dd className="font-display text-[1.15rem] leading-none text-accent-soft">{tier.price}</dd>
+                    </div>
+                  ))}
+                </dl>
+                {event.pricingNote && <p className="mt-2 text-[0.74rem] text-white/40">{event.pricingNote}</p>}
+              </>
+            )}
           </div>
         </div>
 
@@ -109,7 +126,11 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
             <h4 className="mt-6 text-2xl font-medium text-chalk">Το αίτημά σας καταχωρήθηκε</h4>
             <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
               Θα επικοινωνήσουμε τηλεφωνικά για επιβεβαίωση. Για άμεση κράτηση καλέστε στο{' '}
-              <span className="text-chalk">{venue.phones.landline}</span>.
+              <span className="text-chalk">{venue.phones.landline}</span> ή γράψτε μας στο{' '}
+              <a href={`mailto:${venue.emails.reservations}`} className="text-chalk underline-offset-4 hover:underline">
+                {venue.emails.reservations}
+              </a>
+              .
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <a href={`tel:${venue.phoneLinks.landline}`} className="btn-primary">
@@ -165,7 +186,7 @@ export default function BookingModal({ isOpen, occasion, onClose }: Props) {
                       onClick={() => setParty(size)}
                       className={`h-8 min-w-8 px-2 text-sm font-semibold transition ${
                         party === size
-                          ? 'bg-accent text-white'
+                          ? 'bg-accent text-ink'
                           : 'bg-white/[0.06] text-muted hover:bg-white/[0.12] hover:text-chalk'
                       }`}
                     >

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Clock3, MapPin, Phone, Smartphone } from 'lucide-react';
+import { Clock3, Mail, MapPin, Phone, Smartphone } from 'lucide-react';
 import { Instagram } from './BrandIcons';
 import { venue } from '@/lib/site';
 import Reveal from './Reveal';
@@ -22,8 +22,8 @@ export default function LocationSection() {
             Κλείστε το τραπέζι σας πριν <span className="accent-word">εξαντληθούν</span>.
           </Reveal>
           <Reveal as="p" delay={120} className="mt-4 max-w-lg text-[0.98rem] leading-relaxed text-white/60 snap:mt-[1.8vh]">
-            Τα τραπέζια μπροστά στη σκηνή κλείνουν από νωρίς μέσα στην εβδομάδα. Θα μας βρείτε δύο βήματα από την
-            Αντώνη Τρίτση, με εύκολη στάθμευση γύρω από το μαγαζί.
+            Τα τραπέζια μπροστά στη σκηνή κλείνουν από νωρίς μέσα στην εβδομάδα. Θα μας βρείτε στην{' '}
+            {venue.street}, στην καρδιά της περιοχής {venue.areaShort}, με ταξί μέχρι την πόρτα.
           </Reveal>
 
           <Reveal delay={180} className="mt-7 flex flex-col gap-3 sm:flex-row snap:mt-[3.5vh]">
@@ -36,7 +36,12 @@ export default function LocationSection() {
           </Reveal>
 
           <Reveal delay={240} className="mt-8 grid gap-3 sm:grid-cols-2 snap:mt-[4vh]">
-            <InfoRow icon={<MapPin className="h-4 w-4" />} label="Διεύθυνση" value={venue.address} hint={venue.city} />
+            <InfoRow
+              icon={<MapPin className="h-4 w-4" />}
+              label="Διεύθυνση"
+              value={venue.address}
+              hint={`${venue.area} · ${venue.postcode}`}
+            />
             <InfoRow
               icon={<Smartphone className="h-4 w-4" />}
               label="Κινητό"
@@ -47,16 +52,23 @@ export default function LocationSection() {
             <InfoRow
               icon={<Clock3 className="h-4 w-4" />}
               label="Ώρες"
-              value="Παρ. & Σάβ. από 21:00"
-              hint="Live από τις 21:30"
+              value={`${venue.hours.openDaysShort} · έως ${venue.hours.close}`}
+              hint={venue.hours.compact}
             />
+            {/* demo: social handles are shown, not linked */}
             <InfoRow
               icon={<Instagram className="h-4 w-4" />}
               label="Social"
               value={`@${venue.social.instagram}`}
-              hint={venue.social.facebook}
-              href={`https://instagram.com/${venue.social.instagram}`}
-              external
+              hint={`TikTok @${venue.social.tiktok}`}
+            />
+            <InfoRow
+              icon={<Mail className="h-4 w-4" />}
+              label="Email κρατήσεων"
+              value={venue.emails.reservations}
+              hint={`Πληροφορίες: ${venue.emails.info}`}
+              href={`mailto:${venue.emails.reservations}`}
+              wide
             />
           </Reveal>
         </div>
@@ -75,14 +87,15 @@ function InfoRow({
   value,
   hint,
   href,
-  external,
+  wide,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   hint?: string;
   href?: string;
-  external?: boolean;
+  /** spans both columns */
+  wide?: boolean;
 }) {
   const content = (
     <>
@@ -97,11 +110,12 @@ function InfoRow({
     </>
   );
 
-  const className =
-    'flex min-w-0 items-center gap-3.5 card-surface px-4 py-3.5 transition-all duration-300 hover:border-accent/35 hover:bg-white/[0.03]';
+  const className = `flex min-w-0 items-center gap-3.5 card-surface px-4 py-3.5 transition-all duration-300 hover:border-accent/35 hover:bg-white/[0.03] ${
+    wide ? 'sm:col-span-2' : ''
+  }`;
 
   return href ? (
-    <a href={href} className={className} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>
+    <a href={href} className={className}>
       {content}
     </a>
   ) : (
@@ -136,7 +150,7 @@ function MockMap() {
         className="absolute inset-x-0 top-[46%] mt-4 h-[2px]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(90deg, rgba(236,74,115,0.4) 0 14px, transparent 14px 28px)',
+            'repeating-linear-gradient(90deg, rgba(230,202,132,0.35) 0 14px, transparent 14px 28px)',
         }}
       />
 
@@ -144,7 +158,7 @@ function MockMap() {
 
       <span className="absolute left-[42%] top-[46%] flex -translate-x-1/2 -translate-y-full flex-col items-center">
         <span className="border border-accent/50 bg-black/85 px-3 py-2 backdrop-blur-md">
-          <Image src="/images/brand/logo-lockup.png" alt="Crayon food & melody" width={96} height={61} className="h-[46px] w-auto" />
+          <Image src="/images/brand/logo-lockup.webp" alt={venue.name} width={1200} height={424} sizes="130px" className="h-[40px] w-auto" />
         </span>
         <span className="relative mt-1 flex h-4 w-4">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
@@ -153,12 +167,14 @@ function MockMap() {
       </span>
 
       <span className="absolute left-4 top-4 border border-white/10 bg-black/60 px-2.5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/50 backdrop-blur-md">
-        Αντώνη Τρίτση
+        {venue.street}
       </span>
 
       <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 border border-white/10 bg-black/70 px-4 py-3 backdrop-blur-xl">
         <div className="min-w-0">
-          <p className="truncate text-[0.9rem] font-semibold text-chalk">{venue.address}</p>
+          <p className="truncate text-[0.9rem] font-semibold text-chalk">
+            {venue.address}, {venue.postcode}
+          </p>
           <p className="flex items-center gap-1.5 text-[0.76rem] text-muted">
             <Smartphone className="h-3 w-3" /> Κρατήσεις: {venue.phones.mobile}
           </p>
@@ -167,7 +183,7 @@ function MockMap() {
           href={venue.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#d62553]"
+          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink transition hover:bg-accent-soft"
         >
           Οδηγίες στο Maps
         </a>

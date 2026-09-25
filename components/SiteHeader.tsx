@@ -36,15 +36,15 @@ export default function SiteHeader() {
       }`}
     >
       <div className="flex h-[var(--header-h)] items-center justify-between gap-4 px-4 sm:px-6 lg:px-5 xl:px-8">
-        <a href="#top" aria-label="Crayon Food & Melody — αρχή" className="block shrink-0 transition hover:opacity-85">
+        <a href="#top" aria-label={`${venue.name} — αρχή`} className="block shrink-0 transition hover:opacity-85">
           <Image
-            src="/images/brand/logo-lockup.png"
-            alt="Crayon Food & Melody"
-            width={448}
-            height={284}
+            src="/images/brand/logo-lockup.webp"
+            alt={venue.name}
+            width={1200}
+            height={424}
             priority
-            sizes="86px"
-            className="h-[46px] w-auto sm:h-[54px]"
+            sizes="140px"
+            className="h-[40px] w-auto sm:h-[46px]"
           />
         </a>
 
