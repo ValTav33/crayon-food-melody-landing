@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Clock3, Mail, MapPin, Phone, Smartphone } from 'lucide-react';
+import { Clock3, Mail, MapPin, Navigation, Phone, Smartphone } from 'lucide-react';
 import { Instagram } from './BrandIcons';
 import { venue } from '@/lib/site';
 import Reveal from './Reveal';
@@ -12,7 +12,7 @@ export default function LocationSection() {
 
   return (
     <section id="kratisi" aria-label="Κράτηση & Τοποθεσία" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
-      <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 snap:py-[4.5vh]">
+      <div className="page-container relative grid min-h-0 flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 snap:py-[4.5vh]">
         <div className="flex flex-col justify-center">
           <Reveal className="flex items-center gap-3">
             <span className="h-px w-8 rule-accent" />
@@ -46,7 +46,7 @@ export default function LocationSection() {
               icon={<Smartphone className="h-4 w-4" />}
               label="Κινητό"
               value={venue.phones.mobile}
-              hint="Κλήση ή WhatsApp"
+              hint="Γραμμή κρατήσεων"
               href={`tel:${venue.phoneLinks.mobile}`}
             />
             <InfoRow
@@ -170,22 +170,25 @@ function MockMap() {
         {venue.street}
       </span>
 
-      <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 border border-white/10 bg-black/70 px-4 py-3 backdrop-blur-xl">
-        <div className="min-w-0">
+      {/* Wraps by its own width, not a breakpoint: address and button share a line when the
+          map is wide; on phones and in the narrow 1024px column the button drops below and
+          grows to full width instead of squeezing the address to «26ης …». */}
+      <div className="absolute inset-x-3 bottom-3 flex flex-wrap items-center gap-3 border border-white/10 bg-black/70 p-3.5 backdrop-blur-xl">
+        <div className="min-w-0 grow-[999] basis-56">
           <p className="truncate text-[0.9rem] font-semibold text-chalk">
             {venue.address}, {venue.postcode}
           </p>
           <p className="flex items-center gap-1.5 text-[0.76rem] text-muted">
-            <Smartphone className="h-3 w-3" /> Κρατήσεις: {venue.phones.mobile}
+            <Smartphone className="h-3 w-3 shrink-0" /> Κρατήσεις: {venue.phones.mobile}
           </p>
         </div>
         <a
           href={venue.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="shrink-0 bg-accent px-4 py-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink transition hover:bg-accent-soft"
+          className="flex min-h-11 grow items-center justify-center gap-2 bg-accent px-4 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink transition hover:bg-accent-soft active:bg-accent-soft"
         >
-          Οδηγίες στο Maps
+          <Navigation className="h-3.5 w-3.5" /> Οδηγίες στο Maps
         </a>
       </div>
     </div>

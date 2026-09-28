@@ -36,10 +36,14 @@ export default function SiteFooter() {
 
           <nav>
             <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-accent-soft">Πλοήγηση</h3>
-            <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3">
+            {/* 32px rows as before, but the whole row is the tap target instead of the text line */}
+            <ul className="mt-4 grid grid-cols-2 gap-x-6">
               {SECTIONS.filter((s) => s.id !== 'top').map((section) => (
                 <li key={section.id}>
-                  <a href={`#${section.id}`} className="text-[0.92rem] text-white/60 transition hover:text-chalk">
+                  <a
+                    href={`#${section.id}`}
+                    className="flex min-h-8 items-center text-[0.92rem] text-white/60 transition hover:text-chalk active:text-chalk"
+                  >
                     {section.label}
                   </a>
                 </li>
@@ -58,19 +62,22 @@ export default function SiteFooter() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent-soft" />
-                <span>
-                  <a href={`tel:${venue.phoneLinks.landline}`} className="transition hover:text-chalk">
+                {/* py on the links, -my on the column: bigger tap targets, first line still level with the icon */}
+                <span className="-my-1 flex flex-col">
+                  <a href={`tel:${venue.phoneLinks.landline}`} className="py-1 transition hover:text-chalk active:text-chalk">
                     {venue.phones.landline}
                   </a>
-                  <br />
-                  <a href={`tel:${venue.phoneLinks.mobile}`} className="transition hover:text-chalk">
+                  <a href={`tel:${venue.phoneLinks.mobile}`} className="py-1 transition hover:text-chalk active:text-chalk">
                     {venue.phones.mobile}
                   </a>
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent-soft" />
-                <a href={`mailto:${venue.emails.reservations}`} className="transition hover:text-chalk">
+                <a
+                  href={`mailto:${venue.emails.reservations}`}
+                  className="-my-1 min-w-0 break-words py-1 transition hover:text-chalk active:text-chalk"
+                >
                   {venue.emails.reservations}
                 </a>
               </li>

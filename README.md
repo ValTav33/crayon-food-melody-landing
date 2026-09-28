@@ -34,11 +34,11 @@ components/
   LocationSection.tsx # κράτηση + τοποθεσία: CTA, info, stylised map mockup
   Reveal.tsx          # fade-up όταν ένα στοιχείο μπαίνει στην οθόνη
   BookingProvider.tsx # context: άνοιγμα modal από οπουδήποτε (προαιρετικά για συγκεκριμένο event)
-  BookingModal.tsx    # φόρμα κράτησης + άμεση κλήση / WhatsApp· από event δείχνει περιγραφή & τιμές
-  MobileActionBar.tsx # floating bar: Κλήση · WhatsApp · Κράτηση
+  BookingModal.tsx    # φόρμα κράτησης (bottom sheet σε κινητά) + άμεση κλήση· από event δείχνει περιγραφή & τιμές
+  MobileActionBar.tsx # floating bar σε κινητά: Κλήση · Κράτηση τραπεζιού
   BrandIcons.tsx      # Instagram/Facebook/TikTok glyphs (η lucide έκοψε τα brand icons)
 data/siteData.json    # ΟΛΟ το περιεχόμενο: venue, events, menu, stories, gallery, reviews
-lib/site.ts           # typed exports του siteData + λίστα ενοτήτων (SECTIONS) + WhatsApp helpers
+lib/site.ts           # typed exports του siteData + λίστα ενοτήτων (SECTIONS)
 lib/types.ts
 lib/useActiveSection.ts # ποια ενότητα είναι στο κέντρο της οθόνης
 lib/useModal.ts       # Escape + scroll lock για popups

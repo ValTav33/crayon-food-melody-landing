@@ -26,6 +26,8 @@
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-h) + 8px);
     -webkit-text-size-adjust: 100%;
+    /* buttons give their own :active feedback; no grey flash box on tap */
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     background-color: var(--ink);
@@ -106,9 +108,12 @@
     @apply relative inline-flex items-center justify-center gap-2 bg-accent px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-ink transition-all duration-300 active:scale-[0.98];
     box-shadow: 0 12px 30px -14px rgba(208, 175, 108, 0.7);
   }
-  .btn-primary:hover {
-    background-color: var(--accent-soft);
-    box-shadow: 0 16px 40px -12px rgba(208, 175, 108, 0.85);
+  /* same condition as Tailwind's `hover:` (hoverOnlyWhenSupported), so taps don't stick */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background-color: var(--accent-soft);
+      box-shadow: 0 16px 40px -12px rgba(208, 175, 108, 0.85);
+    }
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 border border-white/25 bg-white/[0.03] px-7 py-3.5 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-chalk backdrop-blur-md transition-all duration-300 hover:border-white/80 hover:bg-white/[0.08] active:scale-[0.98];
@@ -136,9 +141,11 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
+}
+
+/* iOS centres a date input's value and collapses it when empty; keep it like the text fields */
+input[type='date']::-webkit-date-and-time-value {
+  text-align: left;
 }
 
 /* Scroll-triggered reveal. Content only starts hidden once JS has run (html.js), so it

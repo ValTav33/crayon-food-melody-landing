@@ -203,7 +203,7 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
       <button
         onClick={onClose}
         aria-label="Κλείσιμο"
-        className="absolute right-4 top-4 z-20 border border-white/20 bg-white/10 p-2.5 text-white/85 backdrop-blur-md transition hover:bg-white/20 sm:right-6 sm:top-6"
+        className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center border border-white/20 bg-white/10 text-white/85 backdrop-blur-md transition hover:bg-white/20 active:scale-95 sm:right-6 sm:top-6"
       >
         <X className="h-5 w-5" />
       </button>
@@ -277,10 +277,11 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
             <p className="truncate text-[0.85rem] font-semibold text-white">{venue.name}</p>
             <p className="text-[0.7rem] text-white/60">{story.time}</p>
           </div>
+          {/* mr clears the close button, which sits over this corner on phones */}
           <button
             onClick={() => setPaused((p) => !p)}
             aria-label={paused ? 'Συνέχεια' : 'Παύση'}
-            className="mr-10 p-2 text-white/80 transition hover:text-white sm:mr-12"
+            className="mr-14 flex h-11 w-11 shrink-0 items-center justify-center text-white/80 transition hover:text-white sm:mr-12"
           >
             {paused ? <Play className="h-4 w-4 fill-current" /> : <Pause className="h-4 w-4 fill-current" />}
           </button>

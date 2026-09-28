@@ -122,9 +122,12 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
 
         <button
           onClick={() => open(`${event.title} · ${event.schedule}`, event.id)}
-          className="w-full border border-accent/50 bg-accent/[0.08] py-3 text-[0.78rem] font-bold uppercase tracking-[0.16em] text-chalk transition-all duration-300 hover:border-accent hover:bg-accent hover:text-ink active:scale-[0.98]"
+          className="w-full border border-accent/50 bg-accent/[0.08] py-3.5 text-[0.78rem] font-bold uppercase tracking-[0.16em] text-chalk transition-all duration-300 [container-type:inline-size] hover:border-accent hover:bg-accent hover:text-ink active:scale-[0.98] active:bg-accent active:text-ink"
         >
-          Κράτηση για αυτή τη βραδιά
+          {/* the long label needs ~265px: cards narrower than that (phones, 1024px desktops)
+              get the short one instead of a two-line button; the night is on the card anyway */}
+          <span className="[@container(min-width:18rem)]:hidden">Κράτηση τραπεζιού</span>
+          <span className="hidden [@container(min-width:18rem)]:inline">Κράτηση για αυτή τη βραδιά</span>
         </button>
       </div>
     </Reveal>

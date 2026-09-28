@@ -28,10 +28,3 @@ export const NAV_LINKS = [
   { id: 'atmosfaira', label: 'Ατμόσφαιρα' },
   { id: 'kratisi', label: 'Τοποθεσία' },
 ] as const;
-
-export const whatsappHref = (message: string) =>
-  `https://wa.me/${venue.phoneLinks.mobile.replace('+', '')}?text=${encodeURIComponent(message)}`;
-
-/** The default WhatsApp opener, optionally naming the night the guest is booking for. */
-export const bookingMessage = (occasion?: string) =>
-  `Γεια σας! Θα ήθελα κράτηση στο ${venue.name}${occasion ? ` για «${occasion}»` : ''}.`;

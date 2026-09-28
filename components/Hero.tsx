@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ArrowDown, Clock3, MapPin, MessageCircle } from 'lucide-react';
-import { bookingMessage, venue, whatsappHref } from '@/lib/site';
+import { ArrowDown, Clock3, MapPin, Smartphone } from 'lucide-react';
+import { venue } from '@/lib/site';
 import { useBooking } from './BookingProvider';
 
 const SLIDES = [
@@ -44,10 +44,11 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/85 to-ink lg:hidden" />
       </div>
 
-      <div className="page-container grid min-h-[calc(100svh-var(--header-h))] flex-1 items-center gap-12 py-12 lg:grid-cols-[1.08fr_0.92fr] snap:min-h-0 snap:py-[4.5vh]">
+      <div className="page-container grid min-h-[calc(100svh-var(--header-h))] flex-1 grid-cols-1 items-center gap-12 py-12 lg:grid-cols-[1.08fr_0.92fr] snap:min-h-0 snap:py-[4.5vh]">
         <div className="max-w-2xl">
-          <div className="inline-flex animate-fade-up items-center gap-2.5 border border-accent/35 bg-accent/[0.08] px-4 py-2 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 bg-accent-soft" />
+          {/* on phones the tagline wraps to two lines: the dot stays with the first */}
+          <div className="inline-flex animate-fade-up items-start gap-2.5 border border-accent/35 bg-accent/[0.08] px-4 py-2 backdrop-blur-md">
+            <span className="mt-[0.3rem] h-1.5 w-1.5 shrink-0 bg-accent-soft sm:mt-[0.35rem]" />
             <span className="text-[0.66rem] font-bold uppercase tracking-[0.2em] text-accent-soft sm:text-[0.72rem] sm:tracking-[0.24em]">
               {venue.tagline}
             </span>
@@ -84,10 +85,10 @@ export default function Hero() {
               sub={`Ανοιχτά έως ${venue.hours.close}`}
             />
             <TrustItem
-              icon={<MessageCircle className="h-4 w-4" />}
+              icon={<Smartphone className="h-4 w-4" />}
               label={venue.phones.mobile}
-              sub="Κρατήσεις & WhatsApp"
-              href={whatsappHref(bookingMessage())}
+              sub="Γραμμή κρατήσεων"
+              href={`tel:${venue.phoneLinks.mobile}`}
             />
           </div>
         </div>
@@ -160,7 +161,8 @@ function TrustItem({
   );
   const cls = 'flex min-w-0 items-center gap-2.5 sm:px-4 sm:first:pl-0 sm:last:pr-0';
   return href ? (
-    <a href={href} target="_blank" rel="noreferrer" className={`${cls} transition hover:opacity-80`}>
+    // -my/py: a 48px tap target without moving the row
+    <a href={href} className={`${cls} -my-1 py-1 transition hover:opacity-80 active:opacity-70`}>
       {body}
     </a>
   ) : (

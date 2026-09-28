@@ -32,14 +32,14 @@ export default function FullMenuModal({ isOpen, onClose }: { isOpen: boolean; on
         className="absolute inset-0 h-full w-full cursor-default bg-black/85 backdrop-blur-sm animate-fade-in"
       />
 
-      <div className="relative z-10 flex max-h-[94svh] w-full flex-col border border-white/10 bg-ink-card shadow-card animate-scale-in sm:max-h-[88vh] sm:w-[min(860px,94vw)]">
+      <div className="relative z-10 flex max-h-[94svh] w-full flex-col border border-white/10 bg-ink-card shadow-card animate-sheet-up sm:max-h-[88svh] sm:w-[min(860px,94vw)] sm:animate-scale-in">
         <div className="flex shrink-0 items-start justify-between gap-4 border-b border-white/[0.08] px-6 pb-4 pt-6 sm:px-8">
           <div>
             <p className="eyebrow">Κατάλογος</p>
             <h3 className="mt-2 text-[1.9rem] leading-tight text-chalk">Όλο το μενού</h3>
           </div>
-          <button onClick={onClose} aria-label="Κλείσιμο" className="icon-btn p-2.5" autoFocus>
-            <X className="h-4 w-4" />
+          <button onClick={onClose} aria-label="Κλείσιμο" className="icon-btn h-11 w-11 shrink-0 p-0" autoFocus>
+            <X className="h-[18px] w-[18px]" />
           </button>
         </div>
 
@@ -48,14 +48,14 @@ export default function FullMenuModal({ isOpen, onClose }: { isOpen: boolean; on
             <button
               key={cat.id}
               onClick={() => jumpTo(cat.id)}
-              className="shrink-0 border border-white/15 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/70 transition hover:border-accent hover:text-chalk"
+              className="min-h-10 shrink-0 border border-white/15 px-4 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/70 transition hover:border-accent hover:text-chalk active:border-accent active:text-chalk"
             >
               {cat.title}
             </button>
           ))}
         </div>
 
-        <div ref={scrollRef} className="relative min-h-0 flex-1 overflow-y-auto px-6 py-6 sm:px-8">
+        <div ref={scrollRef} className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-6 sm:px-8">
           {menuCategories.map((cat) => (
             <section key={cat.id} data-category={cat.id} className="mb-9 last:mb-2">
               <h4 className="flex items-center gap-3 text-[1.35rem] text-chalk">
@@ -83,7 +83,7 @@ export default function FullMenuModal({ isOpen, onClose }: { isOpen: boolean; on
           ))}
         </div>
 
-        <div className="flex shrink-0 flex-col items-center gap-3 border-t border-white/[0.08] px-6 py-4 sm:flex-row sm:justify-between sm:px-8">
+        <div className="flex shrink-0 flex-col items-center gap-3 border-t border-white/[0.08] px-6 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:flex-row sm:justify-between sm:px-8">
           <p className="text-xs text-white/35">Ενδεικτικές τιμές — demo κατάλογος.</p>
           <button
             onClick={() => {

@@ -2,6 +2,9 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  // `hover:` only on devices that really hover, so a tap on a phone doesn't leave a card
+  // stuck in its lifted/zoomed hover state
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     // Square design language: every radius utility resolves to 0 except `full`,
     // which stays for the few things that are genuinely round (avatars, glows).
@@ -48,11 +51,14 @@ const config: Config = {
         'fade-up': { '0%': { opacity: '0', translate: '0 18px' }, '100%': { opacity: '1', translate: '0 0' } },
         'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
         'scale-in': { '0%': { opacity: '0', scale: '.96' }, '100%': { opacity: '1', scale: '1' } },
+        // phones: dialogs rise from the bottom edge like a native sheet
+        'sheet-up': { '0%': { translate: '0 100%' }, '100%': { translate: '0 0' } },
       },
       animation: {
         'fade-up': 'fade-up .7s cubic-bezier(.16,1,.3,1) both',
         'fade-in': 'fade-in .5s ease both',
         'scale-in': 'scale-in .35s cubic-bezier(.16,1,.3,1) both',
+        'sheet-up': 'sheet-up .45s cubic-bezier(.16,1,.3,1) both',
       },
     },
   },

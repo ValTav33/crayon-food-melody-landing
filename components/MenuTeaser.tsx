@@ -19,7 +19,9 @@ export default function MenuTeaser() {
 
   return (
     <section id="menu" aria-label="Μενού" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
-      <div className="page-container relative grid min-h-0 flex-1 gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14 snap:items-center snap:py-[4.5vh]">
+      {/* grid-cols-1 = minmax(0,1fr): without it the phone column grows to the full width of
+          the tab row and pushes the dish cards (and their prices) off the screen */}
+      <div className="page-container relative grid min-h-0 flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14 snap:items-center snap:py-[4.5vh]">
         <div className="flex flex-col">
           <SectionHeading
             eyebrow="Stage & Dine"

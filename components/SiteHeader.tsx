@@ -22,8 +22,12 @@ export default function SiteHeader() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+    document.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
     };
   }, [menuOpen]);
 
@@ -36,7 +40,7 @@ export default function SiteHeader() {
       }`}
     >
       <div className="flex h-[var(--header-h)] items-center justify-between gap-4 px-4 sm:px-6 lg:px-5 xl:px-8">
-        <a href="#top" aria-label={`${venue.name} — αρχή`} className="block shrink-0 transition hover:opacity-85">
+        <a href="#top" aria-label={`${venue.name} — αρχή`} className="-my-1 block shrink-0 py-1 transition hover:opacity-85">
           <Image
             src="/images/brand/logo-lockup.webp"
             alt={venue.name}
@@ -85,17 +89,26 @@ export default function SiteHeader() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού'}
             aria-expanded={menuOpen}
-            className="icon-btn p-2.5 text-chalk lg:hidden"
+            aria-controls="mobile-menu"
+            className="icon-btn h-11 w-11 p-0 text-chalk active:scale-95 lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
+      {/* Phones: covers the whole screen below the header (no page peeking through under
+          it), links up top and the two actions pinned where the thumb rests. */}
       {menuOpen && (
-        <div className="border-t border-white/[0.07] bg-ink/95 backdrop-blur-xl lg:hidden">
-          <nav aria-label="Ενότητες σελίδας" className="flex flex-col px-4 py-3 sm:px-6">
-            {SECTIONS.filter((s) => s.id !== 'top').map((section) => {
+        <div
+          id="mobile-menu"
+          className="h-[calc(100svh-var(--header-h))] animate-fade-in overflow-y-auto overscroll-contain border-t border-white/[0.07] bg-ink/[0.97] backdrop-blur-xl lg:hidden"
+        >
+          <nav
+            aria-label="Ενότητες σελίδας"
+            className="flex min-h-full flex-col px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2 sm:px-6"
+          >
+            {SECTIONS.filter((s) => s.id !== 'top').map((section, i) => {
               const isActive = active === section.id;
               return (
                 <a
@@ -106,30 +119,36 @@ export default function SiteHeader() {
                     markNavigation(section.id);
                   }}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`flex items-center gap-3 border-b border-white/[0.05] py-3.5 text-[1.05rem] font-medium transition ${
+                  style={{ animationDelay: `${i * 35}ms` }}
+                  className={`flex min-h-[3.25rem] animate-fade-up items-center gap-3.5 border-b border-white/[0.06] text-[1.1rem] font-medium transition active:text-chalk ${
                     isActive ? 'text-chalk' : 'text-white/65 hover:text-chalk'
                   }`}
                 >
-                  <span className={`h-1.5 w-1.5 ${isActive ? 'bg-accent' : 'bg-white/20'}`} />
+                  <span className={`h-1.5 w-1.5 shrink-0 ${isActive ? 'bg-accent' : 'bg-white/20'}`} />
                   {section.label}
                 </a>
               );
             })}
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                open();
-              }}
-              className="btn-primary mt-4 w-full"
-            >
-              Κράτηση τραπεζιού
-            </button>
-            <a
-              href={`tel:${venue.phoneLinks.landline}`}
-              className="mb-2 mt-3 flex items-center justify-center gap-2 py-2 text-[0.95rem] font-semibold text-chalk"
-            >
-              <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
-            </a>
+
+            <div className="mt-auto pt-8">
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  open();
+                }}
+                className="btn-primary w-full py-4"
+              >
+                Κράτηση τραπεζιού
+              </button>
+              <a href={`tel:${venue.phoneLinks.landline}`} className="btn-ghost mt-3 w-full py-4">
+                <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
+              </a>
+              <p className="mt-5 text-center text-[0.8rem] leading-relaxed text-white/40">
+                {venue.address}, {venue.areaShort}
+                <br />
+                {venue.hours.openDaysShort} · Live {venue.hours.liveStart} · έως {venue.hours.close}
+              </p>
+            </div>
           </nav>
         </div>
       )}
