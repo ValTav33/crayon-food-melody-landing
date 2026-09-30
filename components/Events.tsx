@@ -13,7 +13,7 @@ export default function Events() {
     <section
       id="programma"
       aria-label="Πρόγραμμα"
-      className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0"
+      className="screen relative overflow-hidden py-12 sm:py-24 snap:py-0"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px rule-accent" />
       <div className="page-container flex min-h-0 flex-1 flex-col snap:py-[4.5vh]">
@@ -24,7 +24,8 @@ export default function Events() {
           description="Τέσσερις βραδιές, τρία διαφορετικά shows στη σκηνή μας. Διαλέξτε βραδιά και κλείστε τραπέζι — τα τραπέζια μπροστά στη σκηνή εξαντλούνται πρώτα."
         />
 
-        <div className="no-scrollbar -mx-4 mt-10 flex min-h-0 snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0 snap:mt-[3.5vh] snap:flex-1 snap:pb-0">
+        {/* scroll-px: snapped cards rest on the page gutter, not against the screen edge */}
+        <div className="no-scrollbar -mx-4 mt-10 flex min-h-0 snap-x snap-mandatory scroll-px-4 gap-5 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0 snap:mt-[3.5vh] snap:flex-1 snap:pb-0">
           {events.map((event, i) => (
             <EventCard key={event.id} event={event} index={i} />
           ))}
@@ -60,7 +61,7 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
 
         {/* weekly residency: the weekday(s) stand where a date would */}
         <div className="absolute right-4 top-4 flex min-h-[56px] w-[56px] flex-col items-center justify-center border border-white/20 bg-black/65 py-1.5 backdrop-blur-md">
-          <span className="text-[0.52rem] font-bold uppercase tracking-[0.14em] text-accent-soft">Κάθε</span>
+          <span className="text-[0.625rem] font-bold uppercase tracking-[0.12em] text-accent-soft">Κάθε</span>
           {event.days.map((day) => (
             <span key={day} className="font-display text-[1rem] leading-[1.15] text-chalk">
               {day}
@@ -97,26 +98,29 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
         <div>
           <dl className="grid grid-cols-3 border border-white/[0.08]">
             {event.pricing.map((tier) => (
-              <div key={tier.label} className="flex flex-col justify-between gap-1 border-l border-white/[0.08] px-2.5 py-2 first:border-l-0">
-                <dt className="text-[0.56rem] font-bold uppercase leading-tight tracking-[0.1em] text-muted">{tier.label}</dt>
+              <div key={tier.label} className="flex flex-col justify-between gap-1 border-l border-white/[0.08] px-2 py-2 first:border-l-0 sm:px-2.5">
+                <dt className="text-[0.64rem] font-bold uppercase leading-tight tracking-[0.06em] text-muted">{tier.label}</dt>
                 <dd className="font-display text-[1.05rem] leading-none text-accent-soft">{tier.price}</dd>
               </div>
             ))}
           </dl>
+          {/* two lines on phones: the end («Φιάλη για 4 άτομα») is the part that matters.
+              Desktop snap mode keeps one line so the three cards stay level. */}
           {event.pricingNote && (
-            <p className="mt-1.5 truncate text-[0.7rem] text-white/40 short:hidden" title={event.pricingNote}>
+            <p className="mt-1.5 line-clamp-2 text-[0.7rem] text-white/45 snap:line-clamp-1 short:hidden" title={event.pricingNote}>
               {event.pricingNote}
             </p>
           )}
         </div>
 
-        <div className="flex items-center gap-4 border-t border-white/[0.07] pt-3 text-[0.76rem] text-muted">
-          <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap">
+        {/* wraps instead of squeezing: when both don't fit on one line the genre takes the next */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-white/[0.07] pt-3 text-[0.76rem] text-muted">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
             <Clock3 className="h-3.5 w-3.5 text-accent-soft" /> Προσέλευση {event.arrival}
             {event.liveStart && ` · Live ${event.liveStart}`}
           </span>
-          <span className="inline-flex min-w-0 items-center gap-1.5">
-            <Ticket className="h-3.5 w-3.5 shrink-0 text-accent-soft" /> <span className="truncate">{event.genre}</span>
+          <span className="inline-flex items-start gap-1.5">
+            <Ticket className="mt-px h-3.5 w-3.5 shrink-0 text-accent-soft" /> {event.genre}
           </span>
         </div>
 

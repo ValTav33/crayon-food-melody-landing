@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading';
 
 export default function Reviews() {
   return (
-    <section id="kritikes" aria-label="Κριτικές" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
+    <section id="kritikes" aria-label="Κριτικές" className="screen relative overflow-hidden py-12 sm:py-24 snap:py-0">
       <div className="page-container relative flex min-h-0 flex-1 flex-col justify-center snap:py-[4.5vh]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
@@ -28,7 +28,7 @@ export default function Reviews() {
         </div>
 
         {/* phones: a swipeable rail; md+: two rows of three, compacted to fit one screen */}
-        <div className="no-scrollbar -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 snap:mt-[4vh]">
+        <div className="no-scrollbar -mx-4 mt-10 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 snap:mt-[4vh]">
           {reviews.map((review, i) => (
             <Reveal
               as="blockquote"

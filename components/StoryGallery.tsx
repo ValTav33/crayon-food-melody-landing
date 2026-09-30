@@ -23,7 +23,7 @@ export default function StoryGallery() {
   };
 
   return (
-    <section id="stories" aria-label="Stories" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
+    <section id="stories" aria-label="Stories" className="screen relative overflow-hidden py-12 sm:py-24 snap:py-0">
       <div className="page-container relative flex min-h-0 flex-1 flex-col snap:py-[4.5vh]">
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-6">
           <SectionHeading
@@ -57,7 +57,7 @@ export default function StoryGallery() {
 
         <div
           ref={railRef}
-          className="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 pt-2 sm:-mx-6 sm:px-6 lg:-mx-1 lg:px-1 snap:mt-[3vh] snap:min-h-0 snap:flex-1"
+          className="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 pt-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:-mx-1 lg:scroll-px-1 lg:px-1 snap:mt-[3vh] snap:min-h-0 snap:flex-1"
         >
           {stories.map((story, i) => (
             <StoryCard key={story.id} story={story} index={i} onOpen={() => setActiveIndex(i)} />
@@ -137,7 +137,10 @@ function StoryAvatar({ size }: { size: string }) {
 
 function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () => void }) {
   const [index, setIndex] = useState(startIndex);
-  const [paused, setPaused] = useState(false);
+  // Two separate reasons to stop the clock. Sharing one flag let the hold's touchend
+  // (which fires just before the button's click) undo every tap on «play».
+  const [paused, setPaused] = useState(false); // the pause button / space bar
+  const [held, setHeld] = useState(false); // a finger resting on the story
   const { open } = useBooking();
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -149,11 +152,13 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
       return;
     }
     setIndex(index + 1);
+    setPaused(false);
   }, [index, onClose]);
 
   const goPrev = useCallback(() => {
     if (index === 0) return;
     setIndex(index - 1);
+    setPaused(false);
   }, [index]);
 
   useEffect(() => {
@@ -186,10 +191,14 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
       aria-label="Stories"
       onTouchStart={(e) => {
         touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        setPaused(true);
+        setHeld(true);
+      }}
+      onTouchCancel={() => {
+        setHeld(false);
+        touchStart.current = null;
       }}
       onTouchEnd={(e) => {
-        setPaused(false);
+        setHeld(false);
         const start = touchStart.current;
         if (!start) return;
         const dx = e.changedTouches[0].clientX - start.x;
@@ -262,7 +271,7 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
               {i === index && (
                 <span
                   className="story-progress block h-full bg-white"
-                  style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                  style={{ animationPlayState: paused || held ? 'paused' : 'running' }}
                   onAnimationEnd={goNext}
                 />
               )}
@@ -310,7 +319,7 @@ function StoryViewer({ startIndex, onClose }: { startIndex: number; onClose: () 
             <button
               onClick={() => {
                 onClose();
-                open('Κράτηση τραπεζιού');
+                open();
               }}
               className="btn-primary flex-1 py-3 sm:flex-none"
             >

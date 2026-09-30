@@ -88,7 +88,7 @@ export default function FullMenuModal({ isOpen, onClose }: { isOpen: boolean; on
           <button
             onClick={() => {
               onClose();
-              openBooking('Κράτηση τραπεζιού');
+              openBooking();
             }}
             className="btn-primary w-full py-3 sm:w-auto"
           >

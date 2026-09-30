@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Menu, Phone, X } from 'lucide-react';
-import { NAV_LINKS, SECTIONS, venue } from '@/lib/site';
+import { NAV_LINKS, SECTIONS, venue, viberHref } from '@/lib/site';
 import { markNavigation, useActiveSection } from '@/lib/useActiveSection';
+import { Viber } from './BrandIcons';
 import { useBooking } from './BookingProvider';
 
 export default function SiteHeader() {
@@ -140,9 +141,18 @@ export default function SiteHeader() {
               >
                 Κράτηση τραπεζιού
               </button>
-              <a href={`tel:${venue.phoneLinks.landline}`} className="btn-ghost mt-3 w-full py-4">
-                <Phone className="h-4 w-4 text-accent-soft" /> {venue.phones.landline}
-              </a>
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                <a
+                  href={`tel:${venue.phoneLinks.landline}`}
+                  aria-label={`Κλήση ${venue.phones.landline}`}
+                  className="btn-ghost w-full px-3 py-4"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-accent-soft" /> Κλήση
+                </a>
+                <a href={viberHref} aria-label={`Viber ${venue.phones.mobile}`} className="btn-viber w-full px-3 py-4">
+                  <Viber className="h-[18px] w-[18px] shrink-0" /> Viber
+                </a>
+              </div>
               <p className="mt-5 text-center text-[0.8rem] leading-relaxed text-white/40">
                 {venue.address}, {venue.areaShort}
                 <br />

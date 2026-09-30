@@ -28,3 +28,11 @@ export const NAV_LINKS = [
   { id: 'atmosfaira', label: 'Ατμόσφαιρα' },
   { id: 'kratisi', label: 'Τοποθεσία' },
 ] as const;
+
+/** Opens a Viber chat with the reservations mobile. Viber wants the country code without
+ *  the «+»: the %2B-encoded form doesn't open the chat. */
+export const viberHref = `viber://chat?number=${venue.phoneLinks.mobile.replace('+', '')}`;
+
+/** The weekday codes of siteData (`days`, `hours.bookingDays`) as `Date#getDay()` numbers. */
+const WEEKDAYS: Record<string, number> = { ΚΥΡ: 0, ΔΕΥ: 1, ΤΡΙ: 2, ΤΕΤ: 3, ΠΕΜ: 4, ΠΑΡ: 5, ΣΑΒ: 6 };
+export const toWeekdays = (codes: string[]) => codes.flatMap((code) => (code in WEEKDAYS ? [WEEKDAYS[code]] : []));

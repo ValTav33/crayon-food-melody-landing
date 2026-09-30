@@ -7,13 +7,14 @@ import SectionHeading from './SectionHeading';
 
 const SPAN: Record<string, string> = {
   tall: 'row-span-2',
-  wide: 'col-span-2',
+  // sm+ only: without the two wide tiles the other six pack exactly into 2×4 on phones
+  wide: 'hidden sm:block col-span-2',
   normal: '',
 };
 
 export default function Atmosphere() {
   return (
-    <section id="atmosfaira" aria-label="Ατμόσφαιρα" className="screen relative py-16 sm:py-24 snap:py-0">
+    <section id="atmosfaira" aria-label="Ατμόσφαιρα" className="screen relative py-12 sm:py-24 snap:py-0">
       <div className="page-container flex min-h-0 flex-1 flex-col snap:py-[4.5vh]">
         <SectionHeading
           className="shrink-0"
@@ -22,7 +23,7 @@ export default function Atmosphere() {
           description={`Βελούδινα booths, χρυσός φωτισμός, προσεγμένο δείπνο και μια live σκηνή που δεν σβήνει πριν τις ${venue.hours.close}.`}
         />
 
-        {/* 8 photos pack exactly into 4×3; on desktop the rows stretch to fill the screen */}
+        {/* 8 photos pack exactly into 4×3 (phones: 6 into 2×4); on desktop the rows stretch to fill the screen */}
         <div className="mt-10 grid auto-rows-[150px] grid-flow-row-dense grid-cols-2 gap-3 sm:auto-rows-[190px] sm:grid-cols-4 sm:gap-4 snap:mt-[3.5vh] snap:min-h-0 snap:flex-1 snap:auto-rows-auto snap:grid-rows-3">
           {gallery.map((item, i) => (
             <Reveal
@@ -35,7 +36,8 @@ export default function Atmosphere() {
                 src={item.image}
                 alt={item.label}
                 fill
-                sizes="(max-width: 640px) 50vw, 25vw"
+                // wide tiles only show from sm, where they span half the 4-column grid
+                sizes={item.span === 'wide' ? '50vw' : '(max-width: 640px) 50vw, 25vw'}
                 className="object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-[1.08]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-80 transition group-hover:opacity-95" />

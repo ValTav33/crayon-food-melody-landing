@@ -11,7 +11,7 @@ export default function LocationSection() {
   const { open } = useBooking();
 
   return (
-    <section id="kratisi" aria-label="Κράτηση & Τοποθεσία" className="screen relative overflow-hidden py-16 sm:py-24 snap:py-0">
+    <section id="kratisi" aria-label="Κράτηση & Τοποθεσία" className="screen relative overflow-hidden py-12 sm:py-24 snap:py-0">
       <div className="page-container relative grid min-h-0 flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 snap:py-[4.5vh]">
         <div className="flex flex-col justify-center">
           <Reveal className="flex items-center gap-3">
@@ -36,11 +36,14 @@ export default function LocationSection() {
           </Reveal>
 
           <Reveal delay={240} className="mt-8 grid gap-3 sm:grid-cols-2 snap:mt-[4vh]">
+            {/* the first thing people tap on a phone: it opens directions */}
             <InfoRow
               icon={<MapPin className="h-4 w-4" />}
               label="Διεύθυνση"
               value={venue.address}
-              hint={`${venue.area} · ${venue.postcode}`}
+              hint={`${venue.areaShort} · Οδηγίες στο Maps`}
+              href={venue.mapsUrl}
+              external
             />
             <InfoRow
               icon={<Smartphone className="h-4 w-4" />}
@@ -87,6 +90,7 @@ function InfoRow({
   value,
   hint,
   href,
+  external,
   wide,
 }: {
   icon: React.ReactNode;
@@ -94,6 +98,8 @@ function InfoRow({
   value: string;
   hint?: string;
   href?: string;
+  /** opens in a new tab (a maps link, not tel:/mailto:) */
+  external?: boolean;
   /** spans both columns */
   wide?: boolean;
 }) {
@@ -104,7 +110,8 @@ function InfoRow({
       </span>
       <span className="min-w-0">
         <span className="block text-[0.62rem] font-bold uppercase tracking-[0.2em] text-muted">{label}</span>
-        <span className="mt-0.5 block truncate text-[0.92rem] font-semibold text-chalk">{value}</span>
+        {/* a step smaller on 320px phones, where the email was 13px too wide for its card */}
+        <span className="mt-0.5 block truncate text-[0.92rem] font-semibold text-chalk [@media(max-width:359px)]:text-[0.84rem]">{value}</span>
         {hint && <span className="block truncate text-[0.76rem] text-white/45">{hint}</span>}
       </span>
     </>
@@ -115,7 +122,7 @@ function InfoRow({
   }`;
 
   return href ? (
-    <a href={href} className={className}>
+    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} className={className}>
       {content}
     </a>
   ) : (
@@ -125,7 +132,7 @@ function InfoRow({
 
 function MockMap() {
   return (
-    <div className="relative min-h-[340px] flex-1 overflow-hidden border border-white/[0.08] bg-[#0f1216] sm:min-h-[420px] snap:min-h-0">
+    <div className="relative min-h-[260px] flex-1 overflow-hidden border border-white/[0.08] bg-[#0f1216] sm:min-h-[420px] snap:min-h-0">
       {/* stylised street grid */}
       <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>

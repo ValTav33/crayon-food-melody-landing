@@ -15,7 +15,7 @@ export default function SiteFooter() {
               width={900}
               height={918}
               sizes="110px"
-              className="h-[110px] w-auto"
+              className="h-[84px] w-auto sm:h-[110px]"
             />
             <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-white/50">
               {venue.tagline}. Υψηλή γαστρονομία και live σκηνή στην καρδιά της περιοχής {venue.areaShort}.
@@ -36,13 +36,13 @@ export default function SiteFooter() {
 
           <nav>
             <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-accent-soft">Πλοήγηση</h3>
-            {/* 32px rows as before, but the whole row is the tap target instead of the text line */}
-            <ul className="mt-4 grid grid-cols-2 gap-x-6">
+            {/* 44px rows: the whole row is the tap target, not just the text line */}
+            <ul className="mt-3 grid grid-cols-2 gap-x-6">
               {SECTIONS.filter((s) => s.id !== 'top').map((section) => (
                 <li key={section.id}>
                   <a
                     href={`#${section.id}`}
-                    className="flex min-h-8 items-center text-[0.92rem] text-white/60 transition hover:text-chalk active:text-chalk"
+                    className="flex min-h-11 items-center text-[0.92rem] text-white/60 transition hover:text-chalk active:text-chalk"
                   >
                     {section.label}
                   </a>
@@ -53,7 +53,9 @@ export default function SiteFooter() {
 
           <div>
             <h3 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-accent-soft">Επικοινωνία</h3>
-            <ul className="mt-5 space-y-3 text-[0.92rem] text-white/60">
+            {/* space-y-6: the links' padding reaches 12px past each row, so the rows keep a
+                gap between their tap areas */}
+            <ul className="mt-5 space-y-6 text-[0.92rem] text-white/60">
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-soft" />
                 <span>
@@ -62,12 +64,12 @@ export default function SiteFooter() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent-soft" />
-                {/* py on the links, -my on the column: bigger tap targets, first line still level with the icon */}
-                <span className="-my-1 flex flex-col">
-                  <a href={`tel:${venue.phoneLinks.landline}`} className="py-1 transition hover:text-chalk active:text-chalk">
+                {/* py on the links, -my on the column: 44px tap targets, first line still level with the icon */}
+                <span className="-my-3 flex flex-col">
+                  <a href={`tel:${venue.phoneLinks.landline}`} className="py-3 transition hover:text-chalk active:text-chalk">
                     {venue.phones.landline}
                   </a>
-                  <a href={`tel:${venue.phoneLinks.mobile}`} className="py-1 transition hover:text-chalk active:text-chalk">
+                  <a href={`tel:${venue.phoneLinks.mobile}`} className="py-3 transition hover:text-chalk active:text-chalk">
                     {venue.phones.mobile}
                   </a>
                 </span>
@@ -76,7 +78,7 @@ export default function SiteFooter() {
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent-soft" />
                 <a
                   href={`mailto:${venue.emails.reservations}`}
-                  className="-my-1 min-w-0 break-words py-1 transition hover:text-chalk active:text-chalk"
+                  className="-my-3 min-w-0 break-words py-3 transition hover:text-chalk active:text-chalk"
                 >
                   {venue.emails.reservations}
                 </a>

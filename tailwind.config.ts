@@ -26,6 +26,9 @@ const config: Config = {
         snap: { raw: '(min-width: 1024px) and (min-height: 640px)' },
         // short desktop windows (≤800px tall): hide secondary copy so sections still fit
         short: { raw: '(min-width: 1024px) and (max-height: 800px)' },
+        // room to spare (tablets, desktops): the booking sheet adds its banner and event blurb.
+        // Phones, portrait or landscape, skip them so the form is on screen when it opens.
+        tall: { raw: '(min-width: 640px) and (min-height: 700px)' },
       },
       colors: {
         ink: { DEFAULT: '#0a0a0a', card: '#131313', raised: '#1b1b1b' },
@@ -36,6 +39,8 @@ const config: Config = {
         velvet: { DEFAULT: '#c41c47', soft: '#ec4a73', deep: '#8f1233' },
         chalk: '#f9fafb',
         muted: '#9ca3af',
+        // Viber purple: the brand's #7360F2 a hair deeper, so white labels on it pass AA (4.8:1)
+        viber: { DEFAULT: '#7059EF', deep: '#5B45D6' },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],

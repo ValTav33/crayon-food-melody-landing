@@ -34,9 +34,10 @@ components/
   LocationSection.tsx # κράτηση + τοποθεσία: CTA, info, stylised map mockup
   Reveal.tsx          # fade-up όταν ένα στοιχείο μπαίνει στην οθόνη
   BookingProvider.tsx # context: άνοιγμα modal από οπουδήποτε (προαιρετικά για συγκεκριμένο event)
-  BookingModal.tsx    # φόρμα κράτησης (bottom sheet σε κινητά) + άμεση κλήση· από event δείχνει περιγραφή & τιμές
-  MobileActionBar.tsx # floating bar σε κινητά: Κλήση · Κράτηση τραπεζιού
-  BrandIcons.tsx      # Instagram/Facebook/TikTok glyphs (η lucide έκοψε τα brand icons)
+  BookingModal.tsx    # φόρμα κράτησης (bottom sheet σε κινητά): βραδιά & άτομα με ένα tap, μετά στοιχεία·
+                      # το «Αποστολή» μένει πάντα ορατό· κλήση ή Viber. Από event δείχνει τιμές (+ περιγραφή όπου χωράει)
+  MobileActionBar.tsx # floating bar σε κινητά: Κλήση · Viber · Κράτηση τραπεζιού
+  BrandIcons.tsx      # Instagram/Facebook/TikTok/Viber glyphs (η lucide έκοψε τα brand icons)
 data/siteData.json    # ΟΛΟ το περιεχόμενο: venue, events, menu, stories, gallery, reviews
 lib/site.ts           # typed exports του siteData + λίστα ενοτήτων (SECTIONS)
 lib/types.ts
@@ -49,6 +50,10 @@ scripts/process-media.mjs # ../Media → public/images (WebP), favicon, social c
 κριτικές ζουν στο `data/siteData.json`· για αλλαγές περιεχομένου δεν χρειάζεται να
 πειραχτεί component.
 
+Οι βραδιές που δέχονται κράτηση: `venue.hours.bookingDays` για τη γενική φόρμα και τα
+`days` κάθε event όταν η κράτηση γίνεται από την κάρτα του (κωδικοί `ΠΕΜ`, `ΠΑΡ`, `ΣΑΒ`,
+`ΚΥΡ` κ.λπ.). Η φόρμα προτείνει τις επόμενες 8 τέτοιες βραδιές και δεν δέχεται άλλες μέρες.
+
 ## Layout
 
 Σε desktop (≥1024px πλάτος και ≥640px ύψος) κάθε ενότητα πιάνει ακριβώς μία
@@ -56,6 +61,9 @@ scripts/process-media.mjs # ../Media → public/images (WebP), favicon, social c
 Σε κινητά και πολύ χαμηλά παράθυρα το scroll είναι κανονικό, ώστε τίποτα να μην
 κόβεται. Η αριστερή μπάρα δείχνει ονόματα από 1280px, μόνο δείκτες (όνομα στο
 hover) στα 1024–1279px, και κρύβεται στα κινητά.
+
+Κάτω από 1024px οι φυσαλίδες του φόντου μένουν ακίνητες (ίδια εικόνα, χωρίς συνεχές
+animation), για ομαλό scroll και λιγότερη κατανάλωση μπαταρίας.
 
 ## Παλέτα
 
@@ -92,6 +100,9 @@ node scripts/process-media.mjs          # ή: node scripts/process-media.mjs /pa
 
 - Όλα τα στοιχεία επικοινωνίας, οι τιμές και οι κριτικές είναι demo.
 - Τα social handles εμφανίζονται αλλά δεν είναι links.
+- Το κουμπί Viber ανοίγει συνομιλία με το κινητό (`viber://chat?number=…`, χωρίς «+»).
+  Χρειάζεται την εφαρμογή Viber, γι' αυτό δεν εμφανίζεται σε desktop (≥1024px). Με το demo
+  νούμερο δεν θα βρει λογαριασμό· δοκιμάστε το σε κινητό με το πραγματικό.
 - Η φόρμα κράτησης δεν στέλνει δεδομένα — δείχνει success state.
 - Ο πλήρης κατάλογος ανοίγει σε popup (αντί για PDF).
 - Ο χάρτης είναι στυλιζαρισμένο mockup· το κουμπί «Οδηγίες στο Maps» ψάχνει τη

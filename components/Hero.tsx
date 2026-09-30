@@ -20,9 +20,21 @@ export default function Hero() {
   const { open } = useBooking();
   const [slide, setSlide] = useState(0);
 
+  // The slideshow panel only exists from lg; on phones the clock would re-render the hero
+  // every few seconds for nothing.
   useEffect(() => {
-    const t = window.setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), SLIDE_MS);
-    return () => window.clearInterval(t);
+    const mq = window.matchMedia('(min-width: 1024px)');
+    let t = 0;
+    const sync = () => {
+      window.clearInterval(t);
+      t = mq.matches ? window.setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), SLIDE_MS) : 0;
+    };
+    sync();
+    mq.addEventListener('change', sync);
+    return () => {
+      mq.removeEventListener('change', sync);
+      window.clearInterval(t);
+    };
   }, []);
 
   return (
